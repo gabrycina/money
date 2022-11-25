@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4ec5bfdc-56a5-4e3a-932c-72d3eec79f15" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Money.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/ChoosePrize.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/ChoosePrizeCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/Max.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/MaxCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/Min.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/MinCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/MiniGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/MiniGameCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/Split.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MiniGame/SplitCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Detective.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/DetectiveCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Hacker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/HackerCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/PlayerCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Robber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/RobberCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Spy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/SpyCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Trader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/TraderCreator.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2I02GKn2hhf6RPlbR1mXo2huXKX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4ec5bfdc-56a5-4e3a-932c-72d3eec79f15" name="Changes" comment="" />
+      <created>1669304085517</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1669304085517</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

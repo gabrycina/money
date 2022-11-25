@@ -1,0 +1,23 @@
+package MiniGame;
+
+import java.net.Socket;
+import java.util.List;
+
+public class Max extends MiniGame {
+    public Max(){
+
+    }
+
+    @Override
+    public String getRule(){
+
+    }
+    @Override
+    public double getPrizes(){
+
+    }
+    @Override
+    public void play(List<Socket> socket){
+
+    }
+}
