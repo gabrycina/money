@@ -10,11 +10,11 @@ public class Min extends MiniGame {
 
     @Override
     public String getRule(){
-
+        return "rule";
     }
     @Override
     public double getPrizes(){
-
+        return 13.3;
     }
     @Override
     public void play(List<Socket> socket){
