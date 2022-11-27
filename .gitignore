@@ -1,12 +1,19 @@
-### VS Code ###
-backend/.vscode
+backend/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+backend/.idea/modules.xml
+backend/.idea/jarRepositories.xml
+backend/.idea/compiler.xml
+backend/.idea/libraries/
+*.iws
+*.iml
+*.ipr
 
 ### Mac OS ###
 backend/.DS_Store
-
-### .idea ###
-backend/.idea/compiler.xml
-backend/.idea/jarRepositories.xml
 
 ### client testing ###
 backend/src/main/java/Client.java
