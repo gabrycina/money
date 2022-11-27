@@ -1,0 +1,13 @@
+backend/target/
+### IntelliJ IDEA ###
+backend/.idea/jarRepositories.xml
+backend/.idea/compiler.xml
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### client testing ###
+backend/src/main/java/Client.java
