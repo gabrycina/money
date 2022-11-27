@@ -1,7 +1,7 @@
 package Player;
 
 public class Detective extends Player {
-    public Detective(){
+    public Detective() {
 
     }
 
