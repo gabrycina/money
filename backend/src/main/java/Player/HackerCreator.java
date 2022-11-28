@@ -3,9 +3,9 @@ package Player;
 import java.net.Socket;
 
 public class HackerCreator implements PlayerCreator {
-    private Socket player;
-    private String id;
-    private String username;
+    private final Socket player;
+    private final String id;
+    private final String username;
     private double money;
 
     public HackerCreator(String id, String username, double money,Socket player){

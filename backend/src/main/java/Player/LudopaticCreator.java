@@ -2,13 +2,13 @@ package Player;
 
 import java.net.Socket;
 
-public class DetectiveCreator implements PlayerCreator {
+public class LudopaticCreator implements PlayerCreator {
     private final Socket player;
     private final String id;
     private final String username;
     private double money;
 
-    public DetectiveCreator(String id, String username, double money,Socket player){
+    public LudopaticCreator(String id, String username, double money, Socket player){
         this.id = id;
         this.username = username;
         this.money = money;
@@ -17,6 +17,6 @@ public class DetectiveCreator implements PlayerCreator {
 
     @Override
     public Player create() {
-        return new Detective(this.id,this.username,this.money,this.player);
+        return new Ludopatic(this.id,this.username,this.money,this.player);
     }
 }

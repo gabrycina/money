@@ -36,7 +36,7 @@ public class Game {
                 this.playerCreator = new HackerCreator(user.getId(),user.getUsername(),user.getMoney(),player);
                 break;
             case 1:
-                this.playerCreator = new TraderCreator(user.getId(),user.getUsername(),user.getMoney(),player);
+                this.playerCreator = new LudopaticCreator(user.getId(),user.getUsername(),user.getMoney(),player);
                 break;
             case 2:
                 this.playerCreator = new SpyCreator(user.getId(),user.getUsername(),user.getMoney(),player);
@@ -78,11 +78,15 @@ public class Game {
 
     public void reportToAll(){
         Map<String, String> json = new HashMap<>();
-        json.put("code",this.getId());
-        List<String> users = players.stream().map(Player::getUsername).toList();
-        json.put("players",users.toString());
-        for (Player player: this.players){
-            Json.writeJson(player.getSocket(),json);
+        if (this.players.size() == 4) {
+            /* this.play() */
+        }else {
+            json.put("code", this.getId());
+            List<String> users = players.stream().map(Player::getUsername).toList();
+            json.put("players", users.toString());
+            for (Player player : this.players) {
+                Json.writeJson(player.getSocket(), json);
+            }
         }
     }
 }

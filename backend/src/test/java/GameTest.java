@@ -11,7 +11,7 @@ public class GameTest extends TestCase {
 
     @Before
     @Override
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         super.setUp();
         s = "{action=login, data={username=user, password=psw}}";
         json = new Gson().fromJson(s,Map.class);
@@ -21,7 +21,7 @@ public class GameTest extends TestCase {
 
     @After
     @Override
-    protected void tearDown() throws Exception {
+    public void tearDown() throws Exception {
         super.tearDown();
         s = null;
         json = null;
