@@ -1,9 +1,11 @@
 package Player;
 
+import java.net.Socket;
+
 public class Hacker extends Player {
 
-    public Hacker(){
-
+    public Hacker(String id, String username, double money,Socket player){
+        super(id,username,money,player);
     }
 
     @Override

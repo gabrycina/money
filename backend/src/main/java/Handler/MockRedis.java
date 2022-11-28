@@ -16,10 +16,8 @@ public class MockRedis {
         return db;
     }
 
-    public String putGame(Game game){
-        Integer s = game.hashCode();
-        this.data.put(s.toString(),game);
-        return s.toString();
+    public void putGame(String id, Game game){
+        this.data.put(id,game);
     }
 
     public Game getGame(String s){

@@ -1,8 +1,10 @@
 package Player;
 
-public class Spy extends Player {
-    public Spy(){
+import java.net.Socket;
 
+public class Spy extends Player {
+    public Spy(String id, String username, double money,Socket player){
+        super(id,username,money,player);
     }
 
     @Override

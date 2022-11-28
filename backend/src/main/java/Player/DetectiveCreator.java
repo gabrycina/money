@@ -1,12 +1,22 @@
 package Player;
 
-public class DetectiveCreator implements PlayerCreator {
-    public DetectiveCreator(){
+import java.net.Socket;
 
+public class DetectiveCreator implements PlayerCreator {
+    private Socket player;
+    private String id;
+    private String username;
+    private double money;
+
+    public DetectiveCreator(String id, String username, double money,Socket player){
+        this.id = id;
+        this.username = username;
+        this.money = money;
+        this.player = player;
     }
 
     @Override
     public Player create() {
-        return new Detective();
+        return new Detective(this.id,this.username,this.money,this.player);
     }
 }

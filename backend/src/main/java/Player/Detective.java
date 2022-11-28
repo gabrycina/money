@@ -1,8 +1,11 @@
 package Player;
 
-public class Detective extends Player {
-    public Detective() {
+import java.net.Socket;
 
+public class Detective extends Player {
+
+    public Detective(String id, String username, double money,Socket player) {
+        super(id,username,money,player);
     }
 
     @Override

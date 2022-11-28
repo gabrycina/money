@@ -1,8 +1,10 @@
 package Player;
 
-public class Robber extends Player {
-    public Robber(){
+import java.net.Socket;
 
+public class Robber extends Player {
+    public Robber(String id, String username, double money,Socket player){
+        super(id,username,money,player);
     }
 
     @Override

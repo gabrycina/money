@@ -3,7 +3,6 @@ package Player;
 public class User {
     private String id;
     private String username;
-    private String psw;
     private double money;
 
     public User(String id, String username, double money){
