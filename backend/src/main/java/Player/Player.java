@@ -4,7 +4,7 @@ import java.net.Socket;
 public abstract class Player extends User {
     private double profit;
     private int token;
-    private Socket player;
+    private final Socket player;
 
     public Player(String id, String username, double money,Socket player) {
             super(id,username,money);

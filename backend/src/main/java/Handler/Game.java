@@ -7,6 +7,7 @@ import java.util.*;
 
 public class Game {
     private static Integer id=1272;
+    private final String idGame;
     private List<Player> players;
     private List<MiniGame> miniGames;
     private List<Integer> role;
@@ -15,11 +16,12 @@ public class Game {
     private MiniGameCreator miniGameCreator;
 
     public Game(){
-        this.id++;
+        id++;
+        this.idGame = id.toString();
         this.players = new ArrayList<>();
         this.miniGames = new ArrayList<>();
 
-        this.role = Arrays.asList(0,1,2,3,4);
+        this.role = new ArrayList<>(Arrays.asList(0,1,2,3,4));
         Collections.shuffle(this.role);
 
         List<Integer> miniGames = Arrays.asList(0,1,2,3,4);
@@ -71,13 +73,13 @@ public class Game {
     }
 
     public String getId(){
-        return this.id.toString();
+        return this.idGame;
     }
 
-    public void notifi(){
+    public void reportToAll(){
         Map<String, String> json = new HashMap<>();
-        json.put("code",this.id.toString());
-        List<String> users = players.stream().map(player -> player.getUsername()).toList();
+        json.put("code",this.getId());
+        List<String> users = players.stream().map(Player::getUsername).toList();
         json.put("players",users.toString());
         for (Player player: this.players){
             Json.writeJson(player.getSocket(),json);

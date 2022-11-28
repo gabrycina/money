@@ -1,6 +1,8 @@
 package Handler;
 
 import com.google.gson.Gson;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,8 +11,8 @@ import java.net.Socket;
 import java.util.Map;
 
 public class Json {
-    static Map readJson(Socket client) {
-        String json = new String();
+    static Map readJson(@NotNull Socket client) {
+        String json = null;
         try {
             json = new BufferedReader(
                     new InputStreamReader(

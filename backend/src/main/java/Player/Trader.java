@@ -9,7 +9,7 @@ public class Trader extends Player {
 
     @Override
     public String getRole(){
-        return new String("Trader");
+        return "Trader";
     }
     @Override
     public void useSuperPower(){

@@ -1,8 +1,8 @@
 package Player;
 
 public class User {
-    private String id;
-    private String username;
+    private final String id;
+    private final String username;
     private double money;
 
     public User(String id, String username, double money){

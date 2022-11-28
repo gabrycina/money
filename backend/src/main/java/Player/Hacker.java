@@ -10,7 +10,7 @@ public class Hacker extends Player {
 
     @Override
     public String getRole(){
-        return new String("Hacker");
+        return "Hacker";
     }
     @Override
     public void useSuperPower(){

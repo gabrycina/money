@@ -2,6 +2,7 @@ package Handler;
 
 import Player.User;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
@@ -43,9 +44,11 @@ public class Handler implements Runnable {
         } while (!action.equals("join_party"));
 
         MockRedis games = MockRedis.getDb();
-        Map data = new Gson().fromJson(this.json.get("data").toString(),Map.class);
+        Map data = new Gson().fromJson(this.json.get("data").toString(),new TypeToken<Map<String, String>>() {}.getType()); // forziamo a Map<String, String>
+        Game game = games.getGame(data.get("code").toString());
 
-        games.getGame(data.get("code").toString()).assignRole(this.user,this.clientSocket);
+        game.assignRole(this.user,this.clientSocket);
+        game.reportToAll();
     }
 
     public void loginHandler() {
@@ -53,22 +56,25 @@ public class Handler implements Runnable {
         Bson filter = Filters.and(Filters.eq("username", data.get("username")), Filters.eq("password", data.get("password")));
         Document doc = this.users.find(filter).first(); // unique username
         Map<String,String> map = new HashMap<>();
-        this.user = new User(doc.get("_id").toString(),
-                        doc.get("username").toString(),
-                        (double)doc.get("money"));
 
         if(doc==null) {
             map.put("error", "user does not exists");
         } else {
+            this.user = new User(doc.get("_id").toString(),
+                        doc.get("username").toString(),
+                        (double)doc.get("money"));
             map.put("money", doc.get("money").toString());
         }
 
         Json.writeJson(this.clientSocket, map);
     }
 
-    public void newPartyHandler() { //attenzione l'attributo id è condiviso dai thread
+    public void newPartyHandler() {
         MockRedis games = MockRedis.getDb();
-        Game game = new Game();
+        Game game;
+        synchronized (this) { //race condition per id
+            game = new Game();
+        }
         String id = game.getId();
         games.putGame(id,game);
         Map data = new Gson().fromJson(this.json.get("data").toString(),Map.class);

@@ -9,7 +9,7 @@ public class Spy extends Player {
 
     @Override
     public String getRole(){
-        return new String("Spy");
+        return "Spy";
     }
     @Override
     public void useSuperPower(){

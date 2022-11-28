@@ -9,7 +9,7 @@ public class Robber extends Player {
 
     @Override
     public String getRole(){
-        return new String("Robber");
+        return "Robber";
     }
     @Override
     public void useSuperPower(){
