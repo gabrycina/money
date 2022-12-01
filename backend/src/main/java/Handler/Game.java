@@ -24,7 +24,7 @@ public class Game {
         this.role = new ArrayList<>(Arrays.asList(0,1,2,3,4));
         Collections.shuffle(this.role);
 
-        List<Integer> miniGames = Arrays.asList(0,1,2,3,4);
+        List<Integer> miniGames = Arrays.asList(0,1,2,3);
         Collections.shuffle(miniGames);
         miniGames = Arrays.asList(miniGames.get(0),miniGames.get(1));
         this.assignMiniGames(miniGames);

@@ -38,8 +38,6 @@ public class Handler implements Runnable {
                     this.newPartyHandler();
                     action = "join_party";
                     break;
-                default:
-                    break;
             }
         } while (!action.equals("join_party"));
 
