@@ -15,13 +15,6 @@ class App extends StatelessWidget {
 
   static const String title = 'GoRouter Routes';
 
-  @override
-  Widget build(BuildContext context) => MaterialApp.router(
-        routerDelegate: _router.routerDelegate,
-        routeInformationParser: _router.routeInformationParser,
-        routeInformationProvider: _router.routeInformationProvider,
-      );
-
   final GoRouter _router = GoRouter(
     errorBuilder: (context, state) => ErrorScreen(error: state.error),
     routes: <GoRoute>[
@@ -44,6 +37,13 @@ class App extends StatelessWidget {
       ),
     ],
   );
+
+  @override
+  Widget build(BuildContext context) => MaterialApp.router(
+        routerDelegate: _router.routerDelegate,
+        routeInformationParser: _router.routeInformationParser,
+        routeInformationProvider: _router.routeInformationProvider,
+      );
 }
 
 class ErrorScreen extends StatelessWidget {
