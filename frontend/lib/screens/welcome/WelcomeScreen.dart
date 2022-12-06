@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money/socket_manager.dart';
 
 /// The screen of the first page.
 class WelcomeScreen extends StatelessWidget {
@@ -14,7 +15,9 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                onPressed: () => context.go('/login'),
+                onPressed: () {
+                  context.go('/login');
+                },
                 child: const Text('Welcome'),
               ),
             ],

@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:money/screens/home/HomeScreen.dart';
 import 'package:money/screens/login/LoginScreen.dart';
 import 'package:money/screens/welcome/WelcomeScreen.dart';
+import 'package:money/socket_manager.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-void main() {
+void main() async {
   setPathUrlStrategy();
+  SocketManager.start("192.168.1.173", 7375);
   return runApp(App());
 }
 
