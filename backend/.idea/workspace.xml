@@ -44,7 +44,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.GameTest.testCreateNewParty">
+  <component name="RunManager">
     <configuration name="GameTest.testCreateNewParty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />
@@ -55,41 +55,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.testJsonStringToMap" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Json.testJsonStringToMap" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GameTest" />
+      <option name="MAIN_CLASS_NAME" value="Json" />
       <option name="METHOD_NAME" value="testJsonStringToMap" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.testMapToJsonString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Json.testLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GameTest" />
+      <option name="MAIN_CLASS_NAME" value="Json" />
+      <option name="METHOD_NAME" value="testLogin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Json.testMapToJsonString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Json" />
       <option name="METHOD_NAME" value="testMapToJsonString" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.testMaptoJsonString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Json.testNewParty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GameTest" />
-      <option name="METHOD_NAME" value="testMaptoJsonString" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameTest.testSignIn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GameTest" />
-      <option name="METHOD_NAME" value="testSignIn" />
+      <option name="MAIN_CLASS_NAME" value="Json" />
+      <option name="METHOD_NAME" value="testNewParty" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -97,11 +97,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Json.testNewParty" />
+        <item itemvalue="JUnit.Json.testLogin" />
+        <item itemvalue="JUnit.Json.testMapToJsonString" />
+        <item itemvalue="JUnit.Json.testJsonStringToMap" />
         <item itemvalue="JUnit.GameTest.testCreateNewParty" />
-        <item itemvalue="JUnit.GameTest.testSignIn" />
-        <item itemvalue="JUnit.GameTest.testJsonStringToMap" />
-        <item itemvalue="JUnit.GameTest.testMapToJsonString" />
-        <item itemvalue="JUnit.GameTest.testMaptoJsonString" />
       </list>
     </recent_temporary>
   </component>

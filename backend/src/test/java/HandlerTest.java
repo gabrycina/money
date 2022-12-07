@@ -1,6 +1,5 @@
 import Handler.Game;
 import Handler.MockRedis;
-import com.google.gson.Gson;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -14,21 +13,18 @@ import org.junit.Before;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
-public class GameTest extends TestCase {
-    private String requestString;
-    private Map requestMap;
+public class HandlerTest extends TestCase {
+    private Map<String,String> requestMap;
 
     @Before
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        requestString = "{action=login, data={username=admin, password=admin}}";
-        requestMap = new TreeMap<>(); // TreeMap permette di mantenere l'ordine di inserimento delle chiavi ma le op sono più costose
+        requestMap = new HashMap<>();
         requestMap.put("action","login");
-        requestMap.put("data","{username=admin, password=admin}");
-        assertNotNull(requestString);
+        requestMap.put("username","admin");
+        requestMap.put("password","admin");
         assertNotNull(requestMap);
     }
 
@@ -36,17 +32,7 @@ public class GameTest extends TestCase {
     @Override
     public void tearDown() throws Exception {
         super.tearDown();
-        requestString = null;
         requestMap = null;
-    }
-
-    public void testJsonStringToMap(){
-        Map json = new Gson().fromJson(requestString,Map.class);
-        assertEquals(requestString,json.toString());
-    }
-
-    public void testMapToJsonString(){
-        assertEquals(requestMap.toString(),requestString);
     }
 
     public void testLogin(){
@@ -54,18 +40,18 @@ public class GameTest extends TestCase {
         MongoDatabase db = access.getDatabase("money");
         MongoCollection<Document> users = db.getCollection("Users");
 
-        Map data = new Gson().fromJson(requestMap.get("data").toString(),Map.class);
-        Bson filter = Filters.and(Filters.eq("username", data.get("username")), Filters.eq("password", data.get("password")));
+        Bson filter = Filters.and(Filters.eq("username", requestMap.get("username")),
+                Filters.eq("password", requestMap.get("password")));
         Document doc = users.find(filter).first(); // unique username
 
-        Map<String,String> responce = new HashMap<>();
+        Map<String,String> resp= new HashMap<>();
         if (doc==null) {
-            responce.put("error","user does not exists");
+            resp.put("error","user does not exists");
         }else {
-            responce.put("money", doc.get("money").toString()); //bank account
+            resp.put("money", doc.get("money").toString()); //bank account
         }
 
-        assertEquals(responce.toString(),"{money=100.0}");
+        assertEquals(resp.toString(),"{money=100.0}"); //the user is in the collection
     }
 
     public void testNewParty(){
@@ -75,7 +61,7 @@ public class GameTest extends TestCase {
         String id = game.getId();
         games.putGame(id,game);
 
-        Map data = new TreeMap<>();
+        Map<String,String> data = new HashMap<>();
         data.put("code",id);
 
         assertNotNull(games.getGame(id));

@@ -22,7 +22,7 @@ public class Json {
             e.printStackTrace();
         }
 
-        return new Gson().fromJson(json, new TypeToken<Map<String, String>>() {}.getType()); //create map<String,String>
+        return new Gson().fromJson(json, new TypeToken<Map<String,String>>() {}.getType()); //create Map<String,String>
     }
 
     public static void writeJson(Socket client,Map<String,String> json) {

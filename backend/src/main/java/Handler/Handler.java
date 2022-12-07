@@ -18,7 +18,6 @@ public class Handler implements Runnable {
     private User user;
 
     public Handler(Socket socket, MongoDatabase db)  {
-        this.json = new HashMap<>();
         this.clientSocket = socket;
         this.users = db.getCollection("Users");
     }
