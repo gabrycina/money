@@ -8,7 +8,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   setPathUrlStrategy();
-  SocketManager.start("192.168.1.173", 7375);
+  SocketManager.start("192.168.1.173", 7374);
   return runApp(App());
 }
 
