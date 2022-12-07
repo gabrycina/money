@@ -1,6 +1,11 @@
 package Player;
 
+import Handler.Json;
+
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Detective extends Player {
 
@@ -10,12 +15,17 @@ public class Detective extends Player {
 
     @Override
     public String getRole(){
-        return new String("Detective");
+        return "Detective";
     }
-    @Override
-    public void useSuperPower(){
 
+    @Override
+    public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer){
+        Map<String,String> json = new HashMap<>();
+        json.put("last_winner",lastWinner.getUsername());
+        json.put("prize", Double.valueOf(lastPrize).toString());
+        Json.writeJson(this.getSocket(),json);
     }
+
     @Override
     public void save(){
 

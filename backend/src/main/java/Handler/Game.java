@@ -7,22 +7,21 @@ import java.util.*;
 
 public class Game {
     private static Integer id=1272;
-    private final String idGame;
-    private List<Player> players;
-    private List<MiniGame> miniGames;
-    private List<Integer> role;
-    private Timer timer;
+    private final String ID_GAME;
+    private final List<Player> PLAYERS;
+    private final List<MiniGame> MINI_GAMES;
+    private final List<Integer> ROLE;
     private PlayerCreator playerCreator;
     private MiniGameCreator miniGameCreator;
 
     public Game(){
         id++;
-        this.idGame = id.toString();
-        this.players = new ArrayList<>();
-        this.miniGames = new ArrayList<>();
+        this.ID_GAME = id.toString();
+        this.PLAYERS = new ArrayList<>();
+        this.MINI_GAMES = new ArrayList<>();
 
-        this.role = new ArrayList<>(Arrays.asList(0,1,2,3,4));
-        Collections.shuffle(this.role);
+        this.ROLE = new ArrayList<>(Arrays.asList(0,1,2,3,4));
+        Collections.shuffle(this.ROLE);
 
         List<Integer> miniGames = Arrays.asList(0,1,2,3);
         Collections.shuffle(miniGames);
@@ -30,63 +29,57 @@ public class Game {
         this.assignMiniGames(miniGames);
     }
 
-    public void assignRole (User user,Socket player) { //adesso user diventa player
-        switch (this.role.get(0)) {
-            case 0:
-                this.playerCreator = new HackerCreator(user.getId(),user.getUsername(),user.getMoney(),player);
-                break;
-            case 1:
-                this.playerCreator = new LudopaticCreator(user.getId(),user.getUsername(),user.getMoney(),player);
-                break;
-            case 2:
-                this.playerCreator = new SpyCreator(user.getId(),user.getUsername(),user.getMoney(),player);
-                break;
-            case 3:
-                this.playerCreator = new RobberCreator(user.getId(),user.getUsername(),user.getMoney(),player);
-                break;
-            case 4:
-                this.playerCreator = new DetectiveCreator(user.getId(),user.getUsername(),user.getMoney(),player);
-                break;
-        }
-        this.players.add(this.playerCreator.create());
-        this.role.remove(0);
-    }
-
     private void assignMiniGames(List<Integer> miniGames) {
         for(int i:miniGames){
             switch (i) {
-                case 0:
-                    this.miniGameCreator = new MaxCreator();
-                    break;
-                case 1:
-                    this.miniGameCreator = new MinCreator();
-                    break;
-                case 2:
-                    this.miniGameCreator = new ChoosePrizeCreator();
-                    break;
-                case 3:
-                    this.miniGameCreator = new SplitCreator();
-                    break;
+                case 0 -> this.miniGameCreator = new MaxCreator();
+                case 1 -> this.miniGameCreator = new MinCreator();
+                case 2 -> this.miniGameCreator = new ChoosePrizeCreator();
+                case 3 -> this.miniGameCreator = new SplitCreator();
             }
-            this.miniGames.add(this.miniGameCreator.create());
+            this.MINI_GAMES.add(this.miniGameCreator.create());
         }
+    }
+
+    public void assignRole (User user,Socket player) { //user --> player
+        switch (this.ROLE.get(0)) {
+            case 0 -> this.playerCreator = new HackerCreator(user.getId(), user.getUsername(), user.getMoney(), player);
+            case 1 -> this.playerCreator = new LudopaticCreator(user.getId(), user.getUsername(), user.getMoney(), player);
+            case 2 -> this.playerCreator = new SpyCreator(user.getId(), user.getUsername(), user.getMoney(), player);
+            case 3 -> this.playerCreator = new RobberCreator(user.getId(), user.getUsername(), user.getMoney(), player);
+            case 4 -> this.playerCreator = new DetectiveCreator(user.getId(), user.getUsername(), user.getMoney(), player);
+        }
+        this.PLAYERS.add(this.playerCreator.create());
+        this.ROLE.remove(0); //review complexity
+
+        Map<String, String> json = new HashMap<>();
+        json.put("code", this.getId());
+        List<String> users = this.PLAYERS.stream().map(Player::getUsername).toList();
+        json.put("players", users.toString());
+        this.reportToAll(json);
+
+        if (this.PLAYERS.size() == 4) this.play();
     }
 
     public String getId(){
-        return this.idGame;
+        return this.ID_GAME;
     }
 
-    public void reportToAll(){
-        Map<String, String> json = new HashMap<>();
-        if (this.players.size() == 4) {
-            /* this.play() */
-        }else {
-            json.put("code", this.getId());
-            List<String> users = players.stream().map(Player::getUsername).toList();
-            json.put("players", users.toString());
-            for (Player player : this.players) {
-                Json.writeJson(player.getSocket(), json);
-            }
+    private void reportToAll(Map<String,String> json){
+        for (Player player:this.PLAYERS)
+            Json.writeJson(player.getSocket(),json);
+    }
+
+    private void play() {
+        Map<String,String> resp = new HashMap<>();
+        for(Player player:this.PLAYERS) {
+            resp.put("player_role", player.getRole());
+            Json.writeJson(player.getSocket(),resp);
         }
+
+        for(MiniGame miniGame:this.MINI_GAMES)
+            miniGame.play(this.PLAYERS);
+
+        //todo this.reportToAll(leaderboard)
     }
 }

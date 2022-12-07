@@ -1,6 +1,10 @@
 package Player;
 
+import Handler.Json;
+
 import java.net.Socket;
+import java.util.List;
+import java.util.Map;
 
 public class Hacker extends Player {
 
@@ -13,8 +17,8 @@ public class Hacker extends Player {
         return "Hacker";
     }
     @Override
-    public void useSuperPower(){
-
+    public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer){
+        Json.writeJson(this.getSocket(),lastAnswer);
     }
     @Override
     public void save(){

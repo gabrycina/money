@@ -1,6 +1,11 @@
 package Player;
 
+import Handler.Json;
+
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Spy extends Player {
     public Spy(String id, String username, double money,Socket player){
@@ -11,10 +16,17 @@ public class Spy extends Player {
     public String getRole(){
         return "Spy";
     }
-    @Override
-    public void useSuperPower(){
 
+    @Override
+    public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer){
+        Player target = players.stream()
+                .filter(p->p.getUsername().equals(Json.readJson(this.getSocket()).get("username")))
+                .findFirst().orElse(this);
+        Map<String,String> account = new HashMap<>();
+        account.put("bank_account",Double.valueOf(target.getProfit()).toString());
+        Json.writeJson(this.getSocket(),account);
     }
+
     @Override
     public void save(){
 

@@ -49,7 +49,7 @@ public class GameTest extends TestCase {
         assertEquals(requestMap.toString(),requestString);
     }
 
-    public void testSignIn(){
+    public void testLogin(){
         MongoClient access = MongoClients.create("mongodb+srv://money:py8EaXXi2ZD4cqxH@cluster0.iutok3h.mongodb.net/?retryWrites=true&w=majority");
         MongoDatabase db = access.getDatabase("money");
         MongoCollection<Document> users = db.getCollection("Users");
@@ -68,7 +68,7 @@ public class GameTest extends TestCase {
         assertEquals(responce.toString(),"{money=100.0}");
     }
 
-    public void testCreateNewParty(){
+    public void testNewParty(){
         MockRedis games = MockRedis.getDb();
 
         Game game = new Game();
