@@ -4,12 +4,23 @@ import 'package:money/screens/home/HomeScreen.dart';
 import 'package:money/screens/login/LoginScreen.dart';
 import 'package:money/screens/welcome/WelcomeScreen.dart';
 import 'package:money/socket_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'providers/user.dart';
+import 'providers/leaderboard.dart';
 
 void main() async {
   setPathUrlStrategy();
   SocketManager.start("192.168.1.173", 7374);
-  return runApp(App());
+  return runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => User()),
+        ChangeNotifierProvider(create: (_) => Leaderboard()),
+      ],
+      child: App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {

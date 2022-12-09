@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '/providers/user.dart';
 
 /// The screen of the second page.
 class HomeScreen extends StatelessWidget {
@@ -9,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text("Home"),
+          title: Text("Home :: ${Provider.of<User>(context).username}"),
           automaticallyImplyLeading: false,
         ),
         body: Center(
