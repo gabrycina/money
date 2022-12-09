@@ -12,7 +12,7 @@ class Server {
         MongoDatabase db = access.getDatabase("money");
         ServerSocket server = null;
         try {
-            server = new ServerSocket(8080);
+            server = new ServerSocket(5050);
             server.setReuseAddress(true);
             while (true) {
                 Socket client = server.accept();
