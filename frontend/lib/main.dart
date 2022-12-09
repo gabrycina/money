@@ -32,21 +32,19 @@ class App extends StatelessWidget {
     errorBuilder: (context, state) => ErrorScreen(error: state.error),
     routes: <GoRoute>[
       GoRoute(
-        routes: <GoRoute>[
-          GoRoute(
-            path: 'login',
-            builder: (BuildContext context, GoRouterState state) =>
-                const LoginScreen(),
-          ),
-          GoRoute(
-            path: 'home',
-            builder: (BuildContext context, GoRouterState state) =>
-                const HomeScreen(),
-          ),
-        ],
         path: '/',
         builder: (BuildContext context, GoRouterState state) =>
             const WelcomeScreen(),
+      ),
+      GoRoute(
+        path: '/login',
+        builder: (BuildContext context, GoRouterState state) =>
+            const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/home',
+        builder: (BuildContext context, GoRouterState state) =>
+            const HomeScreen(),
       ),
     ],
   );

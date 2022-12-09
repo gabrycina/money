@@ -12,7 +12,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text("Home :: ${Provider.of<User>(context).username}"),
-          automaticallyImplyLeading: false,
         ),
         body: Center(
           child: Column(
