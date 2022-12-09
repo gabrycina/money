@@ -22,6 +22,7 @@ public abstract class MiniGame {
 
     protected void checkSplit(){
         Map<String, String> json = new HashMap<>();
+        json.put("winner", "false");
         if(Json.readJson(this.lastWinner.getSocket()).get("split").equals("true")){
             json.put("prize", Double.valueOf(this.lastPrize/this.players.size()).toString());
             this.players.forEach(p -> {
@@ -31,9 +32,7 @@ public abstract class MiniGame {
         }else{
             json.put("prize", "0");
             this.lastWinner.addProfit(this.lastPrize);
-            this.players.stream()
-                    .filter(p->!p.getUsername().equals(this.lastWinner.getUsername()))
-                    .forEach(p -> Json.writeJson(p.getSocket(), json));
+            this.reportToAll(json);
         }
     }
 
@@ -42,7 +41,7 @@ public abstract class MiniGame {
             Map<String,String> json = Json.readJson(player.getSocket());
             String username = json.get("username");
             if (!username.equals("")){
-                double money = Double.parseDouble(json.get("money"));
+                double money = Double.parseDouble(json.get("prize"));
                 final Map<String, String> finalJson = new HashMap<>();
                 finalJson.put("prize", Double.toString(money));
                 this.players.stream()
@@ -55,11 +54,11 @@ public abstract class MiniGame {
         }
     }
 
-    protected Map<String,String> getLastAnswer(){
-        return this.lastAnswer;
+    protected double getPrize(){
+        if (this.round == 1) return 100.0;
+        return 200.0;
     }
-    abstract public Player validate();
-    abstract public String getRules();
-    abstract public double getPrize();
     abstract public void play(List<Player> players);
+    abstract public void validate();
+    abstract public String getRules();
 }

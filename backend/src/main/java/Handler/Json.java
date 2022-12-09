@@ -27,7 +27,7 @@ public class Json {
 
     public static void writeJson(Socket client,Map<String,String> json) {
         try {
-            new PrintWriter(client.getOutputStream(), true).println(json.toString());
+            new PrintWriter(client.getOutputStream(), true).println(new Gson().toJson(json));
         } catch (IOException e) {
             e.printStackTrace();
         }

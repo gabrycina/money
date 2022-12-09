@@ -4,10 +4,7 @@ import Handler.Json;
 import Player.Player;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Min extends MiniGame {
     @Override
@@ -18,24 +15,27 @@ public class Min extends MiniGame {
             this.round = i;
             // send rules;
             json = new HashMap<>();
-            json.put("miniGame_rules", this.getRules());
+            json.put("miniGameRules", this.getRules());
             this.reportToAll(json);
             //send timestamp
             json = new HashMap<>();
             json.put("timeStamp", new Timestamp(new Date().getTime()).toString());
             this.reportToAll(json);
             // validate, set last winner and send him the prize
-            this.lastWinner = this.validate();
-            this.lastPrize = this.getPrize();
+            this.validate();
             json = new HashMap<>();
-            json.put("prize", Double.valueOf(this.lastPrize).toString());
-            Json.writeJson(this.lastWinner.getSocket(), json);
-            //check split
-            this.checkSplit();
-            //next step
-            json = new HashMap<>();
-            json.put("nextStep", "true");
-            this.reportToAll(json);
+            if (this.lastWinner == null){
+                json.put("winner","false");
+                json.put("prize", "0");
+                this.reportToAll(json);
+            }else {
+                this.lastPrize = this.getPrize();
+                json.put("winner", "true");
+                json.put("prize", Double.valueOf(this.lastPrize).toString());
+                Json.writeJson(this.lastWinner.getSocket(), json);
+                //check split
+                this.checkSplit();
+            }
             // receive player and money to send
             this.receiveMoney();
             // check if the player wants to use superpower
@@ -48,34 +48,34 @@ public class Min extends MiniGame {
     }
 
     @Override
-    public Player validate() {
+    public void validate() {
         Map<String,String> json;
-        Player winner = null;
-        Timestamp tmp = Timestamp.valueOf("2999-12-12 23:59:59");
-        Timestamp timeStamp;
-        int min = Integer.MAX_VALUE;
+        Map<Integer,List<Player>> options = new HashMap<>();
         int option;
-        for (Player player:this.players){
+
+        for (Player player:this.players){ //vince primo con option massimo
             json = Json.readJson(player.getSocket());
-            timeStamp = Timestamp.valueOf(json.get("timeStamp"));
             option = Integer.parseInt(json.get("option"));
-            this.lastAnswer.put(player.getUsername(),json.get("option"));
-            if(option < min && timeStamp.compareTo(tmp)<0){
-                min = option;
-                tmp = timeStamp;
-                winner = player;
-            }
+
+            List<Player> list = options.get(option);
+            if (list == null)
+                list = new ArrayList<>();
+            list.add(player);
+
+            options.put(option,list);
+            this.lastAnswer.put("player", String.valueOf(option));
         }
-        return winner;
+
+        int res = options.entrySet().stream()
+                .filter(e->e.getValue().size()==1)
+                .map(Map.Entry::getKey).min(Comparator.naturalOrder()).orElse(-1);
+
+        if (res != -1) this.lastWinner = options.get(res).get(0);
+        else this.lastWinner = null;
     }
 
     @Override
     public String getRules(){
         return "rule";
-    }
-
-    @Override
-    public double getPrize(){
-        return 13.3;
     }
 }

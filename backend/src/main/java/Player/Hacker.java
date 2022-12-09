@@ -16,12 +16,9 @@ public class Hacker extends Player {
     public String getRole(){
         return "Hacker";
     }
+
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer){
         Json.writeJson(this.getSocket(),lastAnswer);
-    }
-    @Override
-    public void save(){
-
     }
 }

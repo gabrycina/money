@@ -2,10 +2,14 @@ package Handler;
 
 import MiniGame.*;
 import Player.*;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 import java.net.Socket;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game {
+    private final MongoCollection<Document> USERS;
     private static Integer id=1272;
     private final String ID_GAME;
     private final List<Player> PLAYERS;
@@ -13,9 +17,10 @@ public class Game {
     private final List<Integer> ROLE;
     private PlayerCreator playerCreator;
     private MiniGameCreator miniGameCreator;
-    private static int roleIndex = 0;
+    private int roleIndex = 0;
 
-    public Game(){
+    public Game(MongoCollection<Document> users){
+        this.USERS = users;
         id++;
         this.ID_GAME = id.toString();
         this.PLAYERS = new ArrayList<>();
@@ -72,13 +77,21 @@ public class Game {
     private void play() {
         Map<String,String> resp = new HashMap<>();
         for(Player player:this.PLAYERS) {
-            resp.put("player_role", player.getRole());
+            resp.put("playerRole", player.getRole());
             Json.writeJson(player.getSocket(),resp);
         }
 
         for(MiniGame miniGame:this.MINI_GAMES)
             miniGame.play(this.PLAYERS);
 
-        //todo this.reportToAll(leaderboard)
+        resp = this.PLAYERS.stream()
+                .collect(Collectors.toMap(
+                        Player::getUsername,
+                        p->String.valueOf(p.getProfit()))
+                ); //leaderBoard
+        this.reportToAll(resp);
+
+        for(Player player:this.PLAYERS)
+            player.save(this.USERS);
     }
 }

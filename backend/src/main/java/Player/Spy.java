@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Spy extends Player {
+
     public Spy(String id, String username, double money,Socket player){
         super(id,username,money,player);
     }
@@ -22,13 +23,8 @@ public class Spy extends Player {
         Player target = players.stream()
                 .filter(p->p.getUsername().equals(Json.readJson(this.getSocket()).get("username")))
                 .findFirst().orElse(this);
-        Map<String,String> account = new HashMap<>();
-        account.put("bank_account",Double.valueOf(target.getProfit()).toString());
-        Json.writeJson(this.getSocket(),account);
-    }
-
-    @Override
-    public void save(){
-
+        Map<String,String> bankAccount = new HashMap<>();
+        bankAccount.put("bankAccount",Double.valueOf(target.getProfit()).toString());
+        Json.writeJson(this.getSocket(),bankAccount);
     }
 }

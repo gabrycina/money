@@ -18,7 +18,7 @@ public class Split extends MiniGame {
             this.round = i;
             // send rules;
             json = new HashMap<>();
-            json.put("miniGame_rules", this.getRules());
+            json.put("miniGameRules", this.getRules());
             this.reportToAll(json);
             //send timestamp
             json = new HashMap<>();
@@ -26,10 +26,6 @@ public class Split extends MiniGame {
             this.reportToAll(json);
             // validate
             this.validate();
-            //next step
-            json = new HashMap<>();
-            json.put("nextStep", "true");
-            this.reportToAll(json);
             // receive player and money to send
             this.receiveMoney();
             // check if the player wants to use superpower
@@ -42,23 +38,26 @@ public class Split extends MiniGame {
     }
 
     @Override
-    public Player validate() {
+    public void validate() {
         Map<String,String> json;
         double box = 0;
+        String option;
         for (Player player:this.players){
             json = Json.readJson(player.getSocket());
-            box += Double.parseDouble(json.get("money"));
-            this.lastAnswer.put(player.getUsername(),json.get("money"));
+            option = json.get("option");
+            box += Double.parseDouble(option);
+            player.addProfit(-Double.parseDouble(option));
+            this.lastAnswer.put(player.getUsername(),option);
         }
         final double finalBox = (box + box*0.2)/this.players.size();
         this.players.forEach(p->{
             p.addProfit(finalBox);
             //reportToAll needs O(n) time. It's better notify all here.
             Map<String,String> prize = new HashMap<>();
+            prize.put("winner","false");
             prize.put("prize", Double.valueOf(finalBox).toString());
             Json.writeJson(p.getSocket(),prize);
         });
-        return null;
     }
 
     @Override
@@ -66,8 +65,4 @@ public class Split extends MiniGame {
         return "rule";
     }
 
-    @Override
-    public double getPrize(){
-        return 13.3;
-    }
 }

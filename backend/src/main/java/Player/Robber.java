@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Robber extends Player {
+
     public Robber(String id, String username, double money,Socket player){
         super(id,username,money,player);
     }
@@ -28,10 +29,5 @@ public class Robber extends Player {
         Map<String,String> json = new HashMap<>();
         json.put("loot",Double.valueOf(loot).toString());
         Json.writeJson(this.getSocket(),json);
-    }
-
-    @Override
-    public void save(){
-
     }
 }

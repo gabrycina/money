@@ -1,5 +1,10 @@
 package Player;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import org.bson.Document;
+
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +19,11 @@ public abstract class Player extends User {
             this.profit = 0;
             this.token = 0;
             this.socketPlayer = player;
+    }
+
+    public void save(MongoCollection<Document> users){ //update bank account
+        users.updateOne(Filters.eq("username", super.getUsername()),
+                Updates.set("money", String.valueOf(super.getMoney()+this.getProfit())));
     }
 
     public Socket getSocket(){
@@ -37,5 +47,4 @@ public abstract class Player extends User {
     }
     abstract public String getRole();
     abstract public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer);
-    abstract public void save();
 }

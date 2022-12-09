@@ -25,9 +25,4 @@ public class Detective extends Player {
         json.put("prize", Double.valueOf(lastPrize).toString());
         Json.writeJson(this.getSocket(),json);
     }
-
-    @Override
-    public void save(){
-
-    }
 }

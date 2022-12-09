@@ -21,7 +21,7 @@ public class ChoosePrize extends MiniGame {
             this.round = i;
             // send rules;
             json = new HashMap<>();
-            json.put("miniGame_rules", this.getRules());
+            json.put("miniGameRules", this.getRules());
             this.reportToAll(json);
             //send timestamp
             json = new HashMap<>();
@@ -29,10 +29,6 @@ public class ChoosePrize extends MiniGame {
             this.reportToAll(json);
             // validate,
             this.validate();
-            //next step
-            json = new HashMap<>();
-            json.put("nextStep", "true");
-            this.reportToAll(json);
             // receive player and money to send
             this.receiveMoney();
             // check if the player wants to use superpower
@@ -45,29 +41,62 @@ public class ChoosePrize extends MiniGame {
     }
 
     @Override
-    public Player validate() {
+    public void validate() {
         Map<String,String> json;
-        Set<String> set = new HashSet<>();
-        for(Player player:this.players){
+        Map<String,List<Player>> options = new HashMap<>();
+        String option;
+
+        for (Player player:this.players){
             json = Json.readJson(player.getSocket());
-            set.add(json.get("prize"));
-            this.lastAnswer.put(player.getUsername(),json.get("prize"));
+            option = json.get("option");
+
+            List<Player> list = options.get(option);
+            if (list == null)
+                list = new ArrayList<>();
+            list.add(player);
+
+            options.put(option,list);
+            this.lastAnswer.put("player", String.valueOf(option));
         }
-        if(set.size()==this.players.size()) this.boost = true; //everyone choose a different prize
-        return null;
+
+        this.boost = true;
+        json = new HashMap<>();
+        json.put("winner","false");
+        double prize;
+        for(Map.Entry<String,List<Player>> e:options.entrySet()){
+            if(e.getValue().size()==1) {
+                if (e.getKey().equals("M")) {
+                    e.getValue().get(0).addToken();
+                    if (this.round == 2) {
+                        if (this.boost){
+                            e.getValue().get(0).addToken();
+                            json.put("prize","3M");
+                        }
+                        e.getValue().get(0).addToken();
+                        json.put("prize","2M");
+                    }
+                    json.put("prize","M");
+                } else{
+                    prize = Double.parseDouble(e.getKey());
+                    if (this.round == 2) {
+                        if (this.boost) prize += prize;
+                        else prize += prize * 0.2;
+                    }
+                    e.getValue().get(0).addProfit(prize);
+                    json.put("prize",String.valueOf(prize));
+                }
+                Json.writeJson(e.getValue().get(0).getSocket(),json);
+            } else {
+                this.boost = false;
+                json.put("prize","0");
+                for (Player player:e.getValue())
+                    Json.writeJson(player.getSocket(),json);
+            }
+        }
     }
 
     @Override
     public String getRules(){
         return "rule";
-    }
-
-    @Override
-    public double getPrize(){
-        return 13.2;
-    }
-
-    public boolean getBoost(){
-        return this.boost;
     }
 }
