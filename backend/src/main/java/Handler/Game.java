@@ -76,6 +76,7 @@ public class Game {
 
     private void play() {
         Map<String,String> resp = new HashMap<>();
+
         for(Player player:this.PLAYERS) {
             resp.put("playerRole", player.getRole());
             Json.writeJson(player.getSocket(),resp);
@@ -84,7 +85,7 @@ public class Game {
         for(MiniGame miniGame:this.MINI_GAMES) {
             miniGame.play(this.PLAYERS);
             resp = new HashMap<>();
-            resp.put("maxProfit",String.valueOf(miniGame.profit));
+            resp.put("maxProfit",String.valueOf(miniGame.getProfit()));
             this.reportToAll(resp);
         }
 
@@ -93,15 +94,16 @@ public class Game {
                 .orElse(this.PLAYERS.get(0));
 
         briefCaseWinner.addProfit(100); //briefCase prize
+
         resp = this.PLAYERS.stream()
                 .collect(Collectors.toMap(
                         Player::getUsername,
                         p->String.valueOf(p.getProfit()))
                 ); //leaderBoard
+
         resp.put("briefcase",briefCaseWinner.getUsername());
         this.reportToAll(resp);
 
-        for(Player player:this.PLAYERS)
-            player.save(this.USERS);
+        this.PLAYERS.forEach(p->p.save(this.USERS));
     }
 }

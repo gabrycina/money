@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class MiniGame {
-    public double profit;
+    protected double profit;
     protected List<Player> players;
     protected int round;
     protected Player lastWinner;
@@ -53,6 +53,10 @@ public abstract class MiniGame {
                         });
             }
         }
+    }
+
+    public double getProfit(){
+        return this.profit;
     }
     abstract public void play(List<Player> players);
     abstract public void validate();
