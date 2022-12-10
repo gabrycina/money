@@ -81,14 +81,24 @@ public class Game {
             Json.writeJson(player.getSocket(),resp);
         }
 
-        for(MiniGame miniGame:this.MINI_GAMES)
+        for(MiniGame miniGame:this.MINI_GAMES) {
             miniGame.play(this.PLAYERS);
+            resp = new HashMap<>();
+            resp.put("maxProfit",String.valueOf(miniGame.profit));
+            this.reportToAll(resp);
+        }
 
+        Player briefCaseWinner = this.PLAYERS.stream()
+                .max(Comparator.comparing(Player::getToken))
+                .orElse(this.PLAYERS.get(0));
+
+        briefCaseWinner.addProfit(100); //briefCase prize
         resp = this.PLAYERS.stream()
                 .collect(Collectors.toMap(
                         Player::getUsername,
                         p->String.valueOf(p.getProfit()))
                 ); //leaderBoard
+        resp.put("briefcase",briefCaseWinner.getUsername());
         this.reportToAll(resp);
 
         for(Player player:this.PLAYERS)

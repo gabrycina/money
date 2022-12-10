@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class MiniGame {
-    private double profit;
+    public double profit;
     protected List<Player> players;
     protected int round;
     protected Player lastWinner;
@@ -42,6 +42,7 @@ public abstract class MiniGame {
             String username = json.get("username");
             if (!username.equals("")){
                 double money = Double.parseDouble(json.get("prize"));
+                player.addProfit(-money);
                 final Map<String, String> finalJson = new HashMap<>();
                 finalJson.put("prize", Double.toString(money));
                 this.players.stream()
@@ -52,11 +53,6 @@ public abstract class MiniGame {
                         });
             }
         }
-    }
-
-    protected double getPrize(){
-        if (this.round == 1) return 100.0;
-        return 200.0;
     }
     abstract public void play(List<Player> players);
     abstract public void validate();

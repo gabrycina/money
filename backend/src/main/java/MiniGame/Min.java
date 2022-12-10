@@ -10,13 +10,16 @@ public class Min extends MiniGame {
     @Override
     public void play(List<Player> players){
         this.players = players;
+        this.profit = 150;
         Map<String,String> json;
+        // send rules;
+        json = new HashMap<>();
+        json.put("miniGame","Min");
+        json.put("miniGameRules", this.getRules());
+        this.reportToAll(json);
+
         for(int i=1; i<3; i++) {
             this.round = i;
-            // send rules;
-            json = new HashMap<>();
-            json.put("miniGameRules", this.getRules());
-            this.reportToAll(json);
             //send timestamp
             json = new HashMap<>();
             json.put("timeStamp", new Timestamp(new Date().getTime()).toString());
@@ -29,7 +32,8 @@ public class Min extends MiniGame {
                 json.put("prize", "0");
                 this.reportToAll(json);
             }else {
-                this.lastPrize = this.getPrize();
+                this.lastPrize = 50*(this.round);
+                if(this.round==2) this.lastWinner.addToken();
                 json.put("winner", "true");
                 json.put("prize", Double.valueOf(this.lastPrize).toString());
                 Json.writeJson(this.lastWinner.getSocket(), json);
@@ -38,12 +42,18 @@ public class Min extends MiniGame {
             }
             // receive player and money to send
             this.receiveMoney();
+            json = new HashMap<>();
+            json.put("nextStep","true");
+            this.reportToAll(json);
             // check if the player wants to use superpower
             for (Player player:this.players) {
                 json = Json.readJson(player.getSocket());
                 if (json.get("useSuperPower").equals("true"))
                     player.useSuperPower(players,this.lastWinner,this.lastPrize,this.lastAnswer);
             }
+            json = new HashMap<>();
+            json.put("nextStep","true");
+            this.reportToAll(json);
         }
     }
 
@@ -76,6 +86,11 @@ public class Min extends MiniGame {
 
     @Override
     public String getRules(){
-        return "rule";
+        return """
+                Each player choose a number between [1, 4]
+                The player that put the minimum (unique) number get the price multiplied by the number"
+                Round 1: 50$
+                Round 2: 100$ + 1M
+               """;
     }
 }

@@ -24,7 +24,7 @@ public class Spy extends Player {
                 .filter(p->p.getUsername().equals(Json.readJson(this.getSocket()).get("username")))
                 .findFirst().orElse(this);
         Map<String,String> bankAccount = new HashMap<>();
-        bankAccount.put("bankAccount",Double.valueOf(target.getProfit()).toString());
+        bankAccount.put("result",Double.valueOf(target.getProfit()).toString());
         Json.writeJson(this.getSocket(),bankAccount);
     }
 }
