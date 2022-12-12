@@ -3,6 +3,7 @@ package Player;
 import Handler.Json;
 
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,13 @@ public class Hacker extends Player {
 
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer){
-        Json.writeJson(this.getSocket(),lastAnswer);
+        StringBuilder value = new StringBuilder();
+
+        for(Map.Entry<String,String> entry:lastAnswer.entrySet())
+            value.append(entry.getKey()).append(" answered ").append(entry.getValue()).append("\n");
+
+        Map<String, String> map = new HashMap<>();
+        map.put("result", String.valueOf(value));
+        Json.writeJson(this.getSocket(),map);
     }
 }

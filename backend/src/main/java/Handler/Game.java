@@ -37,6 +37,7 @@ public class Game {
 
     private void assignMiniGames(List<Integer> miniGames) {
         for(int i:miniGames){
+            if(miniGames.get(0)==3) Collections.swap(miniGames,0,1);
             switch (i) {
                 case 0 -> this.miniGameCreator = new MaxCreator();
                 case 1 -> this.miniGameCreator = new MinCreator();

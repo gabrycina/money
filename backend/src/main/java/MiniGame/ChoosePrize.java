@@ -10,7 +10,7 @@ public class ChoosePrize extends MiniGame {
     private boolean boost;
 
     public ChoosePrize() {
-        this.boost = false;
+        this.boost = true;
     }
 
     @Override
@@ -68,7 +68,6 @@ public class ChoosePrize extends MiniGame {
             this.lastAnswer.put("player", String.valueOf(option));
         }
 
-        this.boost = true;
         json = new HashMap<>();
         json.put("winner","false");
         double prize;
