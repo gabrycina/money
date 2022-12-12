@@ -41,7 +41,7 @@ public class ChoosePrize extends MiniGame {
             for (Player player:this.players) {
                 json = Json.readJson(player.getSocket());
                 if (json.get("useSuperPower").equals("true"))
-                    player.useSuperPower(players,this.lastWinner,this.lastPrize,this.lastAnswer);
+                    player.useSuperPower(players,this.lastWinner,this.lastAnswer);
             }
             json = new HashMap<>();
             json.put("nextStep","true");

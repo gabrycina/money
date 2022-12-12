@@ -19,13 +19,15 @@ public class Robber extends Player {
     }
 
     @Override
-    public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer){
+    public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
         Player target = players.stream()
                 .filter(p->p.getUsername().equals(Json.readJson(this.getSocket()).get("username")))
                 .findFirst().orElse(this);
+
         double loot = target.getProfit()*0.05;
         target.addProfit(-loot);
         this.addProfit(loot);
+
         Map<String,String> json = new HashMap<>();
         json.put("result",Double.valueOf(loot).toString());
         Json.writeJson(this.getSocket(),json);

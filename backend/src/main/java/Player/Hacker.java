@@ -19,9 +19,8 @@ public class Hacker extends Player {
     }
 
     @Override
-    public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer){
+    public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
         StringBuilder value = new StringBuilder();
-
         for(Map.Entry<String,String> entry:lastAnswer.entrySet())
             value.append(entry.getKey()).append(" answered ").append(entry.getValue()).append("\n");
 

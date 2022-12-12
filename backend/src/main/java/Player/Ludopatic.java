@@ -19,7 +19,7 @@ public class Ludopatic extends Player {
     }
 
     @Override
-    public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer){
+    public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
         Player target = players.stream()
                 .filter(p->p.getUsername().equals(Json.readJson(this.getSocket()).get("username")))
                 .findFirst().orElse(this);

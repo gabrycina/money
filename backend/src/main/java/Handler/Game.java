@@ -94,7 +94,7 @@ public class Game {
                 .max(Comparator.comparing(Player::getToken))
                 .orElse(this.PLAYERS.get(0));
 
-        briefCaseWinner.addProfit(100); //briefCase prize
+        briefCaseWinner.addProfit(300); //briefCase prize
 
         resp = this.PLAYERS.stream()
                 .collect(Collectors.toMap(

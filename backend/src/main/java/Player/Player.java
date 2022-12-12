@@ -46,5 +46,5 @@ public abstract class Player extends User {
         this.token += 1;
     }
     abstract public String getRole();
-    abstract public void useSuperPower(List<Player> players, Player lastWinner, double lastPrize, Map<String,String> lastAnswer);
+    abstract public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer);
 }
