@@ -1,8 +1,6 @@
 package Handler;
 
 import Player.User;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
@@ -22,12 +20,10 @@ import static com.mongodb.client.model.Sorts.descending;
 public class Handler implements Runnable {
     private final Socket CLIENT_SOCKET;
     private Map<String,String> json;
-    private final MongoCollection<Document> USERS;
     private User user;
 
-    public Handler(Socket socket, MongoDatabase db)  {
+    public Handler(Socket socket)  {
         this.CLIENT_SOCKET = socket;
-        this.USERS = db.getCollection("Users");
     }
 
     @Override
@@ -38,12 +34,13 @@ public class Handler implements Runnable {
             action = this.json.get("action");
             switch (action) {
                 case "login" -> this.loginHandler();
-                case "create_party" -> {
+                case "createParty" -> {
                     this.newPartyHandler();
-                    action = "join_party";
+                    action = "joinParty";
                 }
+                case "leaderBoard" -> this.leaderBoardHandler();
             }
-        } while (!action.equals("join_party"));
+        } while (!action.equals("joinParty"));
 
         MockRedis games = MockRedis.getDb();
         Game game = games.getGame(this.json.get("code"));
@@ -55,7 +52,7 @@ public class Handler implements Runnable {
     private void leaderBoardHandler(){
         List<Document> list = new ArrayList<>();
         Bson projection = Projections.fields(Projections.exclude("password"), Projections.excludeId());
-        this.USERS.find().projection(projection).sort(descending(("money"))).into(list);
+        Mongo.USERS.find().projection(projection).sort(descending(("money"))).into(list);
 
         String leaderboard = list.stream().map(Document::toJson).toList().toString();
         try {
@@ -69,27 +66,27 @@ public class Handler implements Runnable {
     private void loginHandler() {
         Bson filter = Filters.and(Filters.eq("username", this.json.get("username")),
                                     Filters.eq("password", this.json.get("password")));
-        Document doc = this.USERS.find(filter).first(); // unique username
+        Document doc = Mongo.USERS.find(filter).first(); // unique username
 
+        Map<String,String> resp = new HashMap<>();
         if(doc==null) {
-            Map<String,String> resp = new HashMap<>();
             resp.put("error", "user does not exists");
-
-            Json.writeJson(this.CLIENT_SOCKET, resp);
         } else {
             this.user = new User(doc.get("_id").toString(),
                     doc.get("username").toString(),
                     Double.parseDouble(doc.get("money").toString()));
 
-            this.leaderBoardHandler();
+            resp.put("username",this.user.getUsername());
+            resp.put("money",String.valueOf(this.user.getMoney()));
         }
+        Json.writeJson(this.CLIENT_SOCKET, resp);
     }
 
     private void newPartyHandler() {
         MockRedis games = MockRedis.getDb();
         Game game;
         synchronized (this) { //race condition per id
-            game = new Game(this.USERS);
+            game = new Game();
         }
         String id = game.getId();
         games.putGame(id,game);

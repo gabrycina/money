@@ -32,7 +32,7 @@ public class Min extends MiniGame {
                 json.put("prize", "0");
                 this.reportToAll(json);
             }else {
-                this.lastPrize = 50*(this.round);
+                this.lastPrize = 50*this.round;
                 if(this.round==2) this.lastWinner.addToken();
                 json.put("winner", "true");
                 json.put("prize", Double.valueOf(this.lastPrize).toString());

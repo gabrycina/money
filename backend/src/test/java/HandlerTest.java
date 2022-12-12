@@ -57,7 +57,7 @@ public class HandlerTest extends TestCase {
     public void testNewParty(){
         MockRedis games = MockRedis.getDb();
 
-        Game game = new Game(null);
+        Game game = new Game();
         String id = game.getId();
         games.putGame(id,game);
 

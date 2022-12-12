@@ -1,9 +1,8 @@
 package Player;
 
-import com.mongodb.client.MongoCollection;
+import Handler.Mongo;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
-import org.bson.Document;
 
 import java.net.Socket;
 import java.util.List;
@@ -21,8 +20,8 @@ public abstract class Player extends User {
             this.socketPlayer = player;
     }
 
-    public void save(MongoCollection<Document> users){ //update bank account
-        users.updateOne(Filters.eq("username", super.getUsername()),
+    public void save(){ //update bank account
+        Mongo.USERS.updateOne(Filters.eq("username", super.getUsername()),
                 Updates.set("money", String.valueOf(super.getMoney()+this.getProfit())));
     }
 

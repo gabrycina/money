@@ -2,14 +2,11 @@ package Handler;
 
 import MiniGame.*;
 import Player.*;
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
 import java.net.Socket;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Game {
-    private final MongoCollection<Document> USERS;
     private static Integer id=1272;
     private final String ID_GAME;
     private final List<Player> PLAYERS;
@@ -19,8 +16,7 @@ public class Game {
     private MiniGameCreator miniGameCreator;
     private int roleIndex = 0;
 
-    public Game(MongoCollection<Document> users){
-        this.USERS = users;
+    public Game(){
         id++;
         this.ID_GAME = id.toString();
         this.PLAYERS = new ArrayList<>();
@@ -105,6 +101,11 @@ public class Game {
         resp.put("briefcase",briefCaseWinner.getUsername());
         this.reportToAll(resp);
 
-        this.PLAYERS.forEach(p->p.save(this.USERS));
+        for(Player player:this.PLAYERS){
+            player.save();
+            //send player back to main menu
+            Handler clientSock = new Handler(player.getSocket());
+            new Thread(clientSock).start();
+        }
     }
 }
