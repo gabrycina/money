@@ -16,7 +16,8 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "UIAppFonts": "Heavitas.ttf"
     },
     "android": {
       "adaptiveIcon": {
