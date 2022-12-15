@@ -1,4 +1,4 @@
-import { UserInfo } from "@/models";
+import { UserInfo } from "../models";
 import { configureStore } from "@reduxjs/toolkit";
 import { userReducer } from "./slices";
 

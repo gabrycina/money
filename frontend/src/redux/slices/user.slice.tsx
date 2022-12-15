@@ -1,7 +1,5 @@
-import { UserInfo, UserInfoEmptyState } from "../../models";
-import { clearLocalStorage, persistLocalStorage, initialLocalStorage } from "../../utilities";
+import { UserInfoEmptyState } from "../../models";
 import { createSlice } from "@reduxjs/toolkit";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const UserKey = "user";
 
@@ -10,11 +8,13 @@ export const userSlice = createSlice({
   initialState: UserInfoEmptyState, //Default value
   reducers: {
     createUser: (state, action) => {
-      persistLocalStorage<UserInfo>(UserKey, action.payload);
       return action.payload;
     },
+    modifyUser: (state, action) => {
+      const result = { ...state, ...action.payload };
+      return result
+    },
     resetUser: () => {
-      clearLocalStorage(UserKey);
       return UserInfoEmptyState;
     },
   },
