@@ -34,13 +34,22 @@ public class Handler implements Runnable {
             action = this.json.get("action");
             switch (action) {
                 case "login" -> this.loginHandler();
+                case "leaderBoard" -> this.leaderBoardHandler();
                 case "createParty" -> {
                     this.newPartyHandler();
                     action = "joinParty";
                 }
-                case "leaderBoard" -> this.leaderBoardHandler();
             }
-        } while (!action.equals("joinParty"));
+        } while (!action.equals("joinParty") && !action.equals("close"));
+
+        if(action.equals("close")){
+            try {
+                this.CLIENT_SOCKET.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+        }
 
         MockRedis games = MockRedis.getDb();
         Game game = games.getGame(this.json.get("code"));
