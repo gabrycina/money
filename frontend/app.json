@@ -14,20 +14,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "UIAppFonts": "Heavitas.ttf",
-      "bundleIdentifier": "com.money.expo"
+      "UIAppFonts": "Heavitas.ttf"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.money.expo"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
