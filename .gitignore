@@ -1,7 +1,6 @@
 backend/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
-!**/src/test/**/target/
 
 ### IntelliJ IDEA ###
 backend/.idea/modules.xml

@@ -44,7 +44,6 @@ public class GameTest extends TestCase {
         assertTrue(role.get(roleIndex) > -1 && role.get(roleIndex++) < 5);
         assertTrue(role.get(roleIndex) > -1 && role.get(roleIndex++) < 5);
         assertTrue(role.get(roleIndex) > -1 && role.get(roleIndex++) < 5);
-
         assertEquals(roleIndex,5);
     }
 }
