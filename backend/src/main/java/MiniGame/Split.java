@@ -1,6 +1,5 @@
 package MiniGame;
 
-import Handler.Json;
 import Player.Player;
 
 import java.sql.Timestamp;
@@ -39,7 +38,7 @@ public class Split extends MiniGame {
             this.reportToAll(json);
             // check if the player wants to use superpower
             for (Player player:this.players) {
-                json = Json.readJson(player.getSocket());
+                json = player.read();
                 if (json.get("useSuperPower").equals("true"))
                     player.useSuperPower(players,this.lastWinner,this.lastAnswer);
             }
@@ -55,7 +54,7 @@ public class Split extends MiniGame {
         double box = 0;
         String option;
         for (Player player:this.players){
-            json = Json.readJson(player.getSocket());
+            json = player.read();
             option = json.get("option");
             box += Double.parseDouble(option);
             player.addProfit(-Double.parseDouble(option));
@@ -68,7 +67,7 @@ public class Split extends MiniGame {
             Map<String,String> prize = new HashMap<>();
             prize.put("winner","false");
             prize.put("prize", Double.valueOf(finalBox).toString());
-            Json.writeJson(p.getSocket(),prize);
+            p.write(prize);
         });
     }
 

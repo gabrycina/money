@@ -1,6 +1,5 @@
 package MiniGame;
 
-import Handler.Json;
 import Player.Player;
 
 import java.util.HashMap;
@@ -17,17 +16,17 @@ public abstract class MiniGame {
 
     protected void reportToAll(Map<String,String> json){
         for (Player player:this.players)
-            Json.writeJson(player.getSocket(), json);
+           player.write(json);
     }
 
     protected void checkSplit(){
         Map<String, String> json = new HashMap<>();
         json.put("winner", "false");
-        if(Json.readJson(this.lastWinner.getSocket()).get("split").equals("true")){
+        if(this.lastWinner.read().get("split").equals("true")){
             json.put("prize", Double.valueOf(this.lastPrize/this.players.size()).toString());
             this.players.forEach(p -> {
                 p.addProfit(this.lastPrize/this.players.size());
-                Json.writeJson(p.getSocket(), json); //reportToAll needs O(n) time. It's better notify all here.
+                p.write(json); //reportToAll needs O(n) time. It's better notify all here.
             });
         }else{
             json.put("prize", "0");
@@ -38,18 +37,18 @@ public abstract class MiniGame {
 
     protected void receiveMoney(){
         for (Player player:this.players){
-            Map<String,String> json = Json.readJson(player.getSocket());
+            Map<String,String> json = player.read();
             String username = json.get("username");
             if (!username.equals("")){
                 double money = Double.parseDouble(json.get("prize"));
                 player.addProfit(-money);
                 final Map<String, String> finalJson = new HashMap<>();
-                finalJson.put("prize", Double.toString(money));
+                finalJson.put("prize", json.get("prize"));
                 this.players.stream()
                         .filter(p -> p.getUsername().equals(username))
                         .forEach(p->{ //therefore username is unique the player will be one
                             p.addProfit(money);
-                            Json.writeJson(p.getSocket(),finalJson);
+                            p.write(finalJson);
                         });
             }
         }

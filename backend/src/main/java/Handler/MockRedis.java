@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MockRedis {
-    private Map<String,Game> data;
+    private final Map<String,Game> data;
     private static MockRedis db;
 
     private MockRedis() {

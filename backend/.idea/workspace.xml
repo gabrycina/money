@@ -44,7 +44,27 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.GameTest.testAssignMiniGames">
+  <component name="RunManager">
+    <configuration name="ClientTest.testCreatePartyRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ClientTest" />
+      <option name="METHOD_NAME" value="testCreatePartyRequest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientTest.testLoginRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ClientTest" />
+      <option name="METHOD_NAME" value="testLoginRequest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GameTest.testAssignMiniGames" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />
@@ -55,40 +75,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.testAssignRole" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HandlerTest.testJoinParty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GameTest" />
-      <option name="METHOD_NAME" value="testAssignRole" />
+      <option name="MAIN_CLASS_NAME" value="HandlerTest" />
+      <option name="METHOD_NAME" value="testJoinParty" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JsonTest.testReadJson" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HandlerTest.testNewParty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="JsonTest" />
-      <option name="METHOD_NAME" value="testReadJson" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Json.testLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Json" />
-      <option name="METHOD_NAME" value="testLogin" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Json.testNewParty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Json" />
+      <option name="MAIN_CLASS_NAME" value="HandlerTest" />
       <option name="METHOD_NAME" value="testNewParty" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -97,11 +97,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ClientTest.testCreatePartyRequest" />
+        <item itemvalue="JUnit.ClientTest.testLoginRequest" />
+        <item itemvalue="JUnit.HandlerTest.testJoinParty" />
+        <item itemvalue="JUnit.HandlerTest.testNewParty" />
         <item itemvalue="JUnit.GameTest.testAssignMiniGames" />
-        <item itemvalue="JUnit.JsonTest.testReadJson" />
-        <item itemvalue="JUnit.GameTest.testAssignRole" />
-        <item itemvalue="JUnit.Json.testNewParty" />
-        <item itemvalue="JUnit.Json.testLogin" />
       </list>
     </recent_temporary>
   </component>

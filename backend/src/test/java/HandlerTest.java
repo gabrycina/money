@@ -1,5 +1,6 @@
 import Handler.Game;
 import Handler.MockRedis;
+import com.google.gson.Gson;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -48,10 +49,11 @@ public class HandlerTest extends TestCase {
         if (doc==null) {
             resp.put("error","user does not exists");
         }else {
+            resp.put("username",doc.get("username").toString());
             resp.put("money", doc.get("money").toString()); //bank account
         }
 
-        assertEquals(resp.toString(),"{money=100.0}"); //the user is in the collection
+        assertEquals(new Gson().toJson(resp),"{\"money\":\"100\",\"username\":\"admin\"}"); //the user is in the collection
     }
 
     public void testNewParty(){
@@ -64,7 +66,7 @@ public class HandlerTest extends TestCase {
         Map<String,String> data = new HashMap<>();
         data.put("code",id);
 
-        assertNotNull(games.getGame(id));
+        assertNotNull(games.getGame(id)); //test for join
         assertEquals(data.toString(), "{code="+id+"}");
     }
 }

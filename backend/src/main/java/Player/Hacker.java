@@ -1,7 +1,5 @@
 package Player;
 
-import Handler.Json;
-
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +24,6 @@ public class Hacker extends Player {
 
         Map<String, String> map = new HashMap<>();
         map.put("result", String.valueOf(value));
-        Json.writeJson(this.getSocket(),map);
+        this.write(map);
     }
 }

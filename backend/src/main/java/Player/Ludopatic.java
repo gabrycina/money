@@ -1,7 +1,5 @@
 package Player;
 
-import Handler.Json;
-
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +19,11 @@ public class Ludopatic extends Player {
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
         Player target = players.stream()
-                .filter(p->p.getUsername().equals(Json.readJson(this.getSocket()).get("username")))
+                .filter(p->p.getUsername().equals(this.read().get("username")))
                 .findFirst().orElse(this);
         this.addProfit(target.getProfit()*0.1);
         Map<String,String> json = new HashMap<>();
         json.put("result",Double.valueOf(target.getProfit()*0.1).toString());
-        Json.writeJson(this.getSocket(),json);
+        this.write(json);
     }
 }

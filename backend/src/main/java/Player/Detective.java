@@ -1,7 +1,5 @@
 package Player;
 
-import Handler.Json;
-
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +20,6 @@ public class Detective extends Player {
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
         Map<String,String> json = new HashMap<>();
         json.put("result",lastWinner.getUsername());
-        Json.writeJson(this.getSocket(),json);
+        this.write(json);
     }
 }

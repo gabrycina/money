@@ -31,7 +31,12 @@ public class Handler implements Runnable {
         String action;
         do {
             this.json = Json.readJson(this.CLIENT_SOCKET);
-            action = this.json.get("action");
+            try {
+                action = this.json.get("action");
+            }catch (Exception e){
+                System.out.println("Socket closed");
+                return;
+            }
             switch (action) {
                 case "login" -> this.loginHandler();
                 case "leaderBoard" -> this.leaderBoardHandler();
@@ -61,7 +66,7 @@ public class Handler implements Runnable {
     private void leaderBoardHandler(){
         List<Document> list = new ArrayList<>();
         Bson projection = Projections.fields(Projections.exclude("password"), Projections.excludeId());
-        Mongo.USERS.find().projection(projection).sort(descending(("money"))).into(list);
+        Mongodb.USERS.find().projection(projection).sort(descending(("money"))).into(list);
 
         String leaderboard = list.stream().map(Document::toJson).toList().toString();
         try {
@@ -75,7 +80,7 @@ public class Handler implements Runnable {
     private void loginHandler() {
         Bson filter = Filters.and(Filters.eq("username", this.json.get("username")),
                                     Filters.eq("password", this.json.get("password")));
-        Document doc = Mongo.USERS.find(filter).first(); // unique username
+        Document doc = Mongodb.USERS.find(filter).first(); // unique username
 
         Map<String,String> resp = new HashMap<>();
         if(doc==null) {

@@ -68,7 +68,7 @@ public class Game {
 
     private void reportToAll(Map<String,String> json){
         for (Player player:this.PLAYERS)
-            Json.writeJson(player.getSocket(),json);
+            player.write(json);
     }
 
     private void play() {
@@ -76,7 +76,7 @@ public class Game {
 
         for(Player player:this.PLAYERS) {
             resp.put("playerRole", player.getRole());
-            Json.writeJson(player.getSocket(),resp);
+            player.write(resp);
         }
 
         for(MiniGame miniGame:this.MINI_GAMES) {

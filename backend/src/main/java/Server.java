@@ -1,11 +1,11 @@
 import java.io.*;
 import java.net.*;
 import Handler.Handler;
-import Handler.Mongo;
+import Handler.Mongodb;
 
-class Server {
+public class Server {
     public static void main(String[] args){
-        Mongo.init("mongodb+srv://money:py8EaXXi2ZD4cqxH@cluster0.iutok3h.mongodb.net/?retryWrites=true&w=majority");
+        Mongodb.init("mongodb+srv://money:py8EaXXi2ZD4cqxH@cluster0.iutok3h.mongodb.net/?retryWrites=true&w=majority");
         ServerSocket server = null;
         try {
             server = new ServerSocket(8080);

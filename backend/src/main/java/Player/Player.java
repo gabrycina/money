@@ -1,6 +1,7 @@
 package Player;
 
-import Handler.Mongo;
+import Handler.Json;
+import Handler.Mongodb;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 
@@ -21,8 +22,16 @@ public abstract class Player extends User {
     }
 
     public void save(){ //update bank account
-        Mongo.USERS.updateOne(Filters.eq("username", super.getUsername()),
+        Mongodb.USERS.updateOne(Filters.eq("username", super.getUsername()),
                 Updates.set("money", String.valueOf(super.getMoney()+this.getProfit())));
+    }
+
+    public Map<String,String> read(){
+        return Json.readJson(this.getSocket());
+    }
+
+    public void write(Map<String,String> json){
+        Json.writeJson(this.getSocket(),json);
     }
 
     public Socket getSocket(){
