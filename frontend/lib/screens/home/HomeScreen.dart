@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size.fromHeight(50),
                     ),
-                    onPressed: () => context.go('/'),
+                    onPressed: () => context.go('/lobby'),
                     child: const Text('Create Party')),
               ),
               Row(
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Party Code',
-                            hintText: 'Enter valid email id as abc@gmail.com'),
+                            hintText: 'Enter valid party id'),
                       ),
                     ),
                   ),
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ElevatedButton(
-                          onPressed: () => context.go('/'),
+                          onPressed: () => context.go('/lobby'),
                           child: const Text('Join')),
                     ),
                   )

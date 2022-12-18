@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money/screens/home/HomeScreen.dart';
+import 'package:money/screens/lobby/LobbyScreen.dart';
 import 'package:money/screens/login/LoginScreen.dart';
 import 'package:money/screens/welcome/WelcomeScreen.dart';
 import 'package:money/socket_manager.dart';
@@ -45,6 +46,11 @@ class App extends StatelessWidget {
         path: '/home',
         builder: (BuildContext context, GoRouterState state) =>
             const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/lobby',
+        builder: (BuildContext context, GoRouterState state) =>
+            const LobbyScreen(),
       ),
     ],
   );
