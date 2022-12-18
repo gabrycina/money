@@ -51,6 +51,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
+        theme: ThemeData(primarySwatch: Colors.indigo),
         routerDelegate: _router.routerDelegate,
         routeInformationParser: _router.routeInformationParser,
         routeInformationProvider: _router.routeInformationProvider,

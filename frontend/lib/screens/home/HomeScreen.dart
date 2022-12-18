@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money/widgets/leaderboard.dart';
 import 'package:provider/provider.dart';
 import '/providers/user.dart';
 
@@ -11,23 +12,49 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Home :: ${Provider.of<User>(context).username}"),
+          title: Provider.of<User>(context).username == ""
+              ? const Text("Home")
+              : Text("Hi ${Provider.of<User>(context).username} !"),
         ),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ElevatedButton(
-                  onPressed: () => context.go('/'),
-                  child: const Text('Create Party')),
-              TextField(
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.send),
-                    onPressed: (() => "Ask for data and Route to lobby"),
-                  ),
-                ),
+              false ? LeaderBoard() : Text("Leaderboard under construction"),
+              Container(
+                margin: const EdgeInsets.all(10.0),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    onPressed: () => context.go('/'),
+                    child: const Text('Create Party')),
               ),
+              Row(
+                children: <Widget>[
+                  const Flexible(
+                    child: Padding(
+                      //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Party Code',
+                            hintText: 'Enter valid email id as abc@gmail.com'),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ElevatedButton(
+                          onPressed: () => context.go('/'),
+                          child: const Text('Join')),
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),
