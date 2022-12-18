@@ -31,6 +31,7 @@ public class Handler implements Runnable {
         String action;
         do {
             this.json = Json.readJson(this.CLIENT_SOCKET);
+            System.out.println("server receive --> "+this.json.toString());
             try {
                 action = this.json.get("action");
             }catch (Exception e){
