@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch Server",
+            "request": "launch",
+            "mainClass": "Server"
+        },
+        {
             "name": "frontend",
             "cwd": "frontend",
             "request": "launch",

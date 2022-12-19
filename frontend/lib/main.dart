@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money/providers/game.dart';
 import 'package:money/screens/home/HomeScreen.dart';
 import 'package:money/screens/lobby/LobbyScreen.dart';
 import 'package:money/screens/login/LoginScreen.dart';
@@ -12,12 +13,13 @@ import 'providers/leaderboard.dart';
 
 void main() async {
   setPathUrlStrategy();
-  SocketManager.start("192.168.1.173", 7374);
+  SocketManager.start("127.0.0.1", 8080);
   return runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => User()),
         ChangeNotifierProvider(create: (_) => Leaderboard()),
+        ChangeNotifierProvider(create: (_) => Game()),
       ],
       child: App(),
     ),
