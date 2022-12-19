@@ -15,21 +15,32 @@ public class Json {
     public static Map<String,String> readJson(@NotNull Socket client) {
         String json = null;
         try {
-            json = new BufferedReader(
-                    new InputStreamReader(
-                            client.getInputStream())).readLine();
+            json = new BufferedReader(new InputStreamReader(client.getInputStream()))
+                    .readLine();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
         return new Gson().fromJson(json, new TypeToken<Map<String,String>>() {}.getType()); //create Map<String,String>
     }
 
     public static void writeJson(Socket client,Map<String,String> json) {
         try {
-            new PrintWriter(client.getOutputStream(), true).println(new Gson().toJson(json));
+            new PrintWriter(client.getOutputStream(), true)
+                    .println(new Gson().toJson(json));
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package Handler;
 
 import Player.User;
+import com.google.gson.Gson;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
@@ -31,13 +32,8 @@ public class Handler implements Runnable {
         String action;
         do {
             this.json = Json.readJson(this.CLIENT_SOCKET);
-            System.out.println("server receive --> "+this.json.toString());
-            try {
-                action = this.json.get("action");
-            }catch (Exception e){
-                System.out.println("Socket closed");
-                return;
-            }
+            System.out.println("server receive --> "+new Gson().toJson(this.json));
+            action = this.json.get("action");
             switch (action) {
                 case "login" -> this.loginHandler();
                 case "leaderBoard" -> this.leaderBoardHandler();
@@ -52,14 +48,14 @@ public class Handler implements Runnable {
             try {
                 this.CLIENT_SOCKET.close();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
             return;
         }
-
+        // joinParty
         MockRedis games = MockRedis.getDb();
         Game game = games.getGame(this.json.get("code"));
-        synchronized (this) {
+        synchronized (this) { //race condition per role
             game.assignRole(this.user, this.CLIENT_SOCKET);
         }
     }
