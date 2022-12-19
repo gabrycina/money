@@ -58,11 +58,11 @@ public class Game {
         this.PLAYERS.add(this.playerCreator.create());
 
         List<Socket> sockets = this.PLAYERS.stream().map(Player::getSocket).toList();
-        String listUser = this.PLAYERS.stream().map(Player::getUsername).toList().toString();
+        String listUser = this.PLAYERS.stream().map(Player::getUsername).map(s->"\""+s+"\"").toList().toString();
         for(Socket socket:sockets) {
             try {
                 new PrintWriter(socket.getOutputStream(), true)
-                        .println("{\"code\":"+this.getId()+",\"players\":"+listUser+"}");
+                        .println("{\"code\":\""+this.getId()+"\",\"players\":"+listUser+"}");
             } catch (IOException e) {
                 e.printStackTrace();
             }
