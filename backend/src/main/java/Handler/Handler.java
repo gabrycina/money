@@ -72,7 +72,7 @@ public class Handler implements Runnable {
         String leaderboard = list.stream().map(Document::toJson).toList().toString();
         try {
             new PrintWriter(this.CLIENT_SOCKET.getOutputStream(), true)
-                    .println("{"+"\"leaderboard\""+":"+leaderboard+"}");
+                    .println("{\"leaderboard\":"+leaderboard+"}");
         } catch (IOException e) {
             e.printStackTrace();
         }

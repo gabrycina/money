@@ -2,6 +2,9 @@ package Handler;
 
 import MiniGame.*;
 import Player.*;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -54,11 +57,16 @@ public class Game {
         }
         this.PLAYERS.add(this.playerCreator.create());
 
-        Map<String, String> json = new HashMap<>();
-        json.put("code", this.getId());
-        json.put("players", this.PLAYERS.stream().map(Player::getUsername).toList().toString());
-        this.reportToAll(json);
-
+        List<Socket> sockets = this.PLAYERS.stream().map(Player::getSocket).toList();
+        String listUser = this.PLAYERS.stream().map(Player::getUsername).toList().toString();
+        for(Socket socket:sockets) {
+            try {
+                new PrintWriter(socket.getOutputStream(), true)
+                        .println("{\"code\":"+this.getId()+",\"players\":"+listUser+"}");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if (roleIndex == 5) this.play();
     }
 
