@@ -19,12 +19,6 @@ public class Json {
                     .readLine();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                client.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return new Gson().fromJson(json, new TypeToken<Map<String,String>>() {}.getType()); //create Map<String,String>
     }
@@ -35,12 +29,6 @@ public class Json {
                     .println(new Gson().toJson(json));
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                client.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
