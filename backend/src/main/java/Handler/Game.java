@@ -67,7 +67,7 @@ public class Game {
                 e.printStackTrace();
             }
         }
-        if (roleIndex == 5) this.play();
+        if (roleIndex == 4) this.play();
     }
 
     public String getId(){
