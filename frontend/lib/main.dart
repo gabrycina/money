@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money/providers/game.dart';
+import 'package:money/screens/game/GameScreen.dart';
 import 'package:money/screens/home/HomeScreen.dart';
 import 'package:money/screens/lobby/LobbyScreen.dart';
 import 'package:money/screens/login/LoginScreen.dart';
@@ -53,6 +54,11 @@ class App extends StatelessWidget {
         path: '/lobby',
         builder: (BuildContext context, GoRouterState state) =>
             const LobbyScreen(),
+      ),
+      GoRoute(
+        path: '/game',
+        builder: (BuildContext context, GoRouterState state) =>
+            const GameScreen(),
       ),
     ],
   );

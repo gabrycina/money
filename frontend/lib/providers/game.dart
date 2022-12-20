@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class Game with ChangeNotifier {
   String _code = "";
   List<String> _players = [];
+  String _role = "";
 
   String get code => _code;
   List<String> get players => _players;
+  String get role => _role;
 
   void setAll(String u, double m) {}
 
@@ -16,6 +18,11 @@ class Game with ChangeNotifier {
 
   set players(List<dynamic> value) {
     _players = List<String>.from(value);
+    notifyListeners();
+  }
+
+  set role(String value) {
+    _role = value;
     notifyListeners();
   }
 }

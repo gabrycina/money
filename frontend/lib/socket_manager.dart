@@ -19,7 +19,10 @@ class SocketManager {
       (Uint8List data) {
         final message = String.fromCharCodes(data);
         debugPrint("Received :: $message");
-        SocketManager.buffer.addLast(jsonDecode(message));
+        List<String> messageSplitted = message.split("\n");
+        for (var msg in messageSplitted) {
+          SocketManager.buffer.addLast(jsonDecode(msg));
+        }
       },
 
       // errore nella ricezione di dati
