@@ -7,6 +7,7 @@ import 'package:crypto/crypto.dart';
 import '../../providers/leaderboard.dart';
 import '../../providers/user.dart';
 import '../../socket_manager.dart';
+import 'package:animated_button/animated_button.dart';
 
 class LoginScreen extends StatelessWidget {
   /// Creates a [LoginScreen].
@@ -18,86 +19,78 @@ class LoginScreen extends StatelessWidget {
     final passwordController = TextEditingController();
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Login"),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: Center(
-                  child: SizedBox(
-                      width: 300,
-                      height: 300,
-                      child: Image.asset('assets/logo.png')),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: TextField(
-                  controller: usernameController,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Username',
-                      hintText: 'Enter valid username'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0),
-                child: TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      hintText: 'Enter secure password'),
-                ),
-              ),
-              Container(
-                height: 50,
-                width: 250,
-                margin: const EdgeInsets.only(top: 15.0),
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20)),
-                child: ElevatedButton(
-                  onPressed: () {
-                    String username = usernameController.text;
-                    String password = passwordController.text;
-
-                    var bytes1 = utf8.encode(password); // data being hashed
-                    var digestPassword = sha256.convert(bytes1);
-
-                    SocketManager.send(
-                        "{action=login,username=$username,password=$digestPassword}\n");
-
-                    SocketManager.receive().then((response) {
-                      SocketManager.send("{action=leaderBoard}\n");
-
-                      Provider.of<User>(context, listen: false)
-                          .setAll(username, double.parse(response["money"]));
-
-                      SocketManager.receive().then((response) {
-                        Provider.of<Leaderboard>(context, listen: false)
-                            .leaderboard = response["leaderboard"];
-                      });
-
-                      context.go('/home');
-                    });
-                  },
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+      backgroundColor: const Color.fromARGB(255, 60, 42, 69),
+      appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
+        title: const Text("Access",
+            style: TextStyle(fontSize: 35, color: Colors.amberAccent)),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              controller: usernameController,
+              style: const TextStyle(fontSize: 20, color: Colors.white),
+              decoration: const InputDecoration(
+                  labelText: 'Username', hintText: 'Enter valid username'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 15.0, right: 15.0, top: 15, bottom: 0),
+            child: TextField(
+              controller: passwordController,
+              style: const TextStyle(fontSize: 20, color: Colors.white),
+              obscureText: true,
+              decoration: const InputDecoration(
+                  labelText: 'Password', hintText: 'Enter secure password'),
+            ),
+          ),
+          Container(
+              margin: const EdgeInsets.only(top: 15.0),
+              child: AnimatedButton(
+                color: Colors.purple,
+                child: const Text(
+                  'LOGIN',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 130,
-              ),
-            ],
+                onPressed: () {
+                  String username = usernameController.text;
+                  String password = passwordController.text;
+
+                  var bytes1 = utf8.encode(password); // data being hashed
+                  var digestPassword = sha256.convert(bytes1);
+
+                  SocketManager.send(
+                      "{action=login,username=$username,password=$digestPassword}\n");
+
+                  SocketManager.receive().then((response) {
+                    SocketManager.send("{action=leaderBoard}\n");
+
+                    Provider.of<User>(context, listen: false)
+                        .setAll(username, double.parse(response["money"]));
+
+                    SocketManager.receive().then((response) {
+                      Provider.of<Leaderboard>(context, listen: false)
+                          .leaderboard = response["leaderboard"];
+                    });
+
+                    context.go('/home');
+                  });
+                },
+              )),
+          const SizedBox(
+            height: 130,
           ),
-        ));
+        ],
+      ),
+    );
   }
 }

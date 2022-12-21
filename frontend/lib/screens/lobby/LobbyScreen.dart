@@ -41,13 +41,29 @@ class LobbyScreenState extends State<LobbyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Lobby")),
+      backgroundColor: const Color.fromARGB(255, 60, 42, 69),
+      appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
+        title: const Text("Lobby",
+            style: TextStyle(fontSize: 35, color: Colors.amberAccent)),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-                "${Provider.of<Game>(context, listen: false).players.length}/4")
+              Provider.of<Game>(context, listen: false).code.trim(),
+              style: const TextStyle(fontSize: 100, color: Colors.amberAccent),
+            ),
+            const Text(
+              "- - - - - - - -",
+              style: TextStyle(fontSize: 30, color: Colors.white38),
+            ),
+            Text(
+              "${Provider.of<Game>(context, listen: false).players.length}/4",
+              style: const TextStyle(fontSize: 30, color: Colors.white38),
+            ),
           ],
         ),
       ),

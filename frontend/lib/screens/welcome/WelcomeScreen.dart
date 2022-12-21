@@ -9,16 +9,29 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text("Welcome")),
+        backgroundColor: const Color.fromARGB(255, 60, 42, 69),
+        appBar: AppBar(
+          shape: const RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.vertical(bottom: Radius.circular(100))),
+          title: const Text("Money",
+              style: TextStyle(fontSize: 35, color: Colors.amberAccent)),
+        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Image.asset(
+                "assets/xt.gif",
+                height: 100,
+                width: 100,
+              ),
               AnimatedButton(
+                color: Colors.purple,
                 child: const Text(
-                  'Simple button',
+                  'PLAY',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 30,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),

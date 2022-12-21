@@ -65,7 +65,20 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-        theme: ThemeData(primarySwatch: Colors.indigo),
+        theme: ThemeData(
+          primarySwatch: Colors.purple,
+          fontFamily: "vtregular",
+          inputDecorationTheme: const InputDecorationTheme(
+            labelStyle: TextStyle(color: Colors.white24),
+            hintStyle: TextStyle(color: Colors.white24),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 2, color: Colors.white24),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 2, color: Colors.white38),
+            ),
+          ),
+        ),
         routerDelegate: _router.routerDelegate,
         routeInformationParser: _router.routeInformationParser,
         routeInformationProvider: _router.routeInformationProvider,
