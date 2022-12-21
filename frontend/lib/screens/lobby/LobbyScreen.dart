@@ -46,7 +46,7 @@ class LobbyScreenState extends State<LobbyScreen> {
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
         title: const Text("Lobby",
-            style: TextStyle(fontSize: 35, color: Colors.amberAccent)),
+            style: TextStyle(fontSize: 35, color: Colors.white)),
       ),
       body: Center(
         child: Column(
@@ -54,7 +54,7 @@ class LobbyScreenState extends State<LobbyScreen> {
           children: <Widget>[
             Text(
               Provider.of<Game>(context, listen: false).code.trim(),
-              style: const TextStyle(fontSize: 100, color: Colors.amberAccent),
+              style: const TextStyle(fontSize: 100, color: Colors.white),
             ),
             const Text(
               "- - - - - - - -",

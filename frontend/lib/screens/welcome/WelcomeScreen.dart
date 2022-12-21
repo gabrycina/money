@@ -15,16 +15,22 @@ class WelcomeScreen extends StatelessWidget {
               borderRadius:
                   BorderRadius.vertical(bottom: Radius.circular(100))),
           title: const Text("Money",
-              style: TextStyle(fontSize: 35, color: Colors.amberAccent)),
+              style: TextStyle(
+                fontSize: 35,
+                color: Colors.white,
+              )),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset(
-                "assets/xt.gif",
-                height: 100,
-                width: 100,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 50.0),
+                child: Image.asset(
+                  "assets/xt.gif",
+                  height: 100,
+                  width: 100,
+                ),
               ),
               AnimatedButton(
                 color: Colors.purple,

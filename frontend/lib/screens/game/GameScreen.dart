@@ -26,7 +26,7 @@ class GameScreenState extends State<GameScreen> {
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
         title: const Text("Game",
-            style: TextStyle(fontSize: 35, color: Colors.amberAccent)),
+            style: TextStyle(fontSize: 35, color: Colors.white)),
       ),
       body: Center(
         child: Column(

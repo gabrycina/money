@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
         title: const Text("Access",
-            style: TextStyle(fontSize: 35, color: Colors.amberAccent)),
+            style: TextStyle(fontSize: 35, color: Colors.white)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
