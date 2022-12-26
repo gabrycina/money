@@ -22,9 +22,12 @@ class GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-    // TODO receive timestamp
-    // new_timestamp = add to timestamp 3 minutes
-    // myDuration = new_timestamp - current_timestamp
+    myDuration = Duration(
+            milliseconds: Provider.of<Game>(context, listen: false).timestamp) +
+        const Duration(minutes: 3) -
+        Duration(milliseconds: DateTime.now().millisecondsSinceEpoch);
+
+    print(myDuration);
     startTimer();
   }
 

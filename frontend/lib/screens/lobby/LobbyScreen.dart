@@ -35,6 +35,10 @@ class LobbyScreenState extends State<LobbyScreen> {
         Provider.of<Game>(context, listen: false).miniGameRules =
             message["miniGameRules"];
 
+        message = await SocketManager.receive();
+        Provider.of<Game>(context, listen: false).timestamp =
+            DateTime.parse(message["timeStamp"]).millisecondsSinceEpoch;
+
         flag = false;
         context.go("/game");
       } else {
