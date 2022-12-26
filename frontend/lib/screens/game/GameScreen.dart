@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:money/socket_manager.dart';
@@ -14,9 +16,38 @@ class GameScreen extends StatefulWidget {
 
 class GameScreenState extends State<GameScreen> {
   /// Creates a [GameScreen].
+  Timer? countdownTimer;
+  Duration myDuration = const Duration(minutes: 3);
+
   @override
   void initState() {
     super.initState();
+    // TODO receive timestamp
+    // new_timestamp = add to timestamp 3 minutes
+    // myDuration = new_timestamp - current_timestamp
+    startTimer();
+  }
+
+  void startTimer() {
+    countdownTimer =
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  void setCountDown() {
+    const reduceSecondsBy = 1;
+    setState(() {
+      final seconds = myDuration.inSeconds - reduceSecondsBy;
+      if (seconds < 0) {
+        countdownTimer!.cancel();
+        debugPrint("Timer :: tempo scaduto");
+      } else {
+        myDuration = Duration(seconds: seconds);
+      }
+    });
+  }
+
+  String timeLeft() {
+    return "${myDuration.inMinutes.toString().padLeft(2, '0')}:${myDuration.inSeconds.remainder(60).toString().padLeft(2, '0')}";
   }
 
   late MediaQueryData queryData;
@@ -60,9 +91,10 @@ class GameScreenState extends State<GameScreen> {
                           height: 25,
                           width: 25,
                         ),
-                        const Text(
-                          "3:00",
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        Text(
+                          timeLeft(),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 25),
                         ),
                       ],
                     ),
