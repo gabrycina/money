@@ -10,27 +10,34 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: const Color.fromARGB(255, 60, 42, 69),
-        appBar: AppBar(
-          shape: const RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.vertical(bottom: Radius.circular(100))),
-          title: const Text("Money",
-              style: TextStyle(
-                fontSize: 35,
-                color: Colors.white,
-              )),
-        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(bottom: 50.0),
-                child: Image.asset(
-                  "assets/xt.gif",
-                  height: 100,
-                  width: 100,
-                ),
+              Stack(
+                children: [
+                  const Text(
+                    "Money",
+                    style: TextStyle(
+                        fontSize: 100,
+                        color: Colors.white,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(10.0, 5.0),
+                            blurRadius: 30.0,
+                            color: Color.fromARGB(100, 0, 0, 0),
+                          ),
+                        ]),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50, top: 50),
+                    child: Image.asset(
+                      "assets/xt.gif",
+                      height: 100,
+                      width: 100,
+                    ),
+                  ),
+                ],
               ),
               AnimatedButton(
                 color: Colors.purple,

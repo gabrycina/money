@@ -21,7 +21,9 @@ class SocketManager {
         debugPrint("Received :: $message");
         List<String> messageSplitted = message.split("\n");
         for (var msg in messageSplitted) {
-          SocketManager.buffer.addLast(jsonDecode(msg));
+          if (msg.isNotEmpty) {
+            SocketManager.buffer.addLast(jsonDecode(msg));
+          }
         }
       },
 

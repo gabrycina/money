@@ -54,7 +54,7 @@ class LobbyScreenState extends State<LobbyScreen> {
           children: <Widget>[
             Text(
               Provider.of<Game>(context, listen: false).code.trim(),
-              style: const TextStyle(fontSize: 100, color: Colors.white),
+              style: const TextStyle(fontSize: 100, color: Colors.amberAccent),
             ),
             const Text(
               "- - - - - - - -",

@@ -20,15 +20,34 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 60, 42, 69),
-      appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
-        title: const Text("Access",
-            style: TextStyle(fontSize: 35, color: Colors.white)),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Stack(
+            children: [
+              const Text(
+                "Login",
+                style: TextStyle(
+                    fontSize: 100,
+                    color: Colors.white,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(10.0, 5.0),
+                        blurRadius: 30.0,
+                        color: Color.fromARGB(100, 0, 0, 0),
+                      ),
+                    ]),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 178, bottom: 20),
+                child: Image.asset(
+                  "assets/xt.gif",
+                  height: 100,
+                  width: 100,
+                ),
+              ),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: TextField(
@@ -54,7 +73,7 @@ class LoginScreen extends StatelessWidget {
               child: AnimatedButton(
                 color: Colors.purple,
                 child: const Text(
-                  'LOGIN',
+                  'ENTER',
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.white,
@@ -80,9 +99,9 @@ class LoginScreen extends StatelessWidget {
                     SocketManager.receive().then((response) {
                       Provider.of<Leaderboard>(context, listen: false)
                           .leaderboard = response["leaderboard"];
-                    });
 
-                    context.go('/home');
+                      context.go('/home');
+                    });
                   });
                 },
               )),

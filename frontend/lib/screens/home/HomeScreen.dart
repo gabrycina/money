@@ -2,8 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:money/widgets/leaderboard.dart';
+import 'package:money/widgets/Leaderboard.dart';
 import 'package:provider/provider.dart';
+import '../../providers/leaderboard.dart';
 import '../../socket_manager.dart';
 import '/providers/user.dart';
 import '/providers/game.dart';
@@ -22,25 +23,21 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
-        title: const Text("Home",
-            style: TextStyle(fontSize: 35, color: Colors.white)),
+        title: Text("Hi ${Provider.of<User>(context, listen: false).username}",
+            style: const TextStyle(fontSize: 30, color: Colors.white)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          false
-              ? LeaderBoard()
-              : const Padding(
-                  padding: EdgeInsets.only(top: 50, bottom: 50),
-                  child: Text(
-                    "⚠️ Leaderboard under construction ⚠️ \n - - - - - - - - - - - - - - - - - -",
-                    style: TextStyle(fontSize: 20, color: Colors.white38),
-                  )),
+          LeaderBoard(
+              Provider.of<Leaderboard>(context, listen: false).leaderboard,
+              "Global Rank Board"),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                  margin: const EdgeInsets.all(10.0),
+                  margin:
+                      const EdgeInsets.only(left: 10.0, right: 10, bottom: 10),
                   child: AnimatedButton(
                     color: Colors.purple,
                     height: 50,
