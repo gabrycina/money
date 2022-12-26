@@ -22,12 +22,20 @@ class LobbyScreenState extends State<LobbyScreen> {
   stayUntilFull() async {
     bool flag = true;
     while (flag) {
-      await SocketManager.receive().then((value) {
+      await SocketManager.receive().then((value) async {
         //CHECK IF IS ROLE MESSAGE
         if (value.containsKey("playerRole")) {
           Provider.of<Game>(context, listen: false).role = value["playerRole"];
-          flag = false;
-          context.go("/game");
+
+          await SocketManager.receive().then((value) {
+            Provider.of<Game>(context, listen: false).miniGame =
+                value["miniGame"];
+            Provider.of<Game>(context, listen: false).miniGameRules =
+                value["miniGameRules"];
+
+            flag = false;
+            context.go("/game");
+          });
         } else {
           setState(() {
             Provider.of<Game>(context, listen: false).players =

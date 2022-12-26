@@ -5,6 +5,7 @@ import 'package:money/screens/game/GameScreen.dart';
 import 'package:money/screens/home/HomeScreen.dart';
 import 'package:money/screens/lobby/LobbyScreen.dart';
 import 'package:money/screens/login/LoginScreen.dart';
+import 'package:money/screens/rules/RulesScreen.dart';
 import 'package:money/screens/welcome/WelcomeScreen.dart';
 import 'package:money/socket_manager.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +60,11 @@ class App extends StatelessWidget {
         path: '/game',
         builder: (BuildContext context, GoRouterState state) =>
             const GameScreen(),
+      ),
+      GoRoute(
+        path: '/rules',
+        builder: (BuildContext context, GoRouterState state) => RulesScreen(
+            Provider.of<Game>(context, listen: false).miniGameRules),
       ),
     ],
   );

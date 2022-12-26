@@ -35,6 +35,12 @@ class _LeaderBoardState extends State<LeaderBoard>
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var r = const TextStyle(color: Colors.purpleAccent, fontSize: 34);
 
