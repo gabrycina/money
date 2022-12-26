@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -80,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   String username = usernameController.text;
                   String password = passwordController.text;
 
@@ -90,19 +92,18 @@ class LoginScreen extends StatelessWidget {
                   SocketManager.send(
                       "{action=login,username=$username,password=$digestPassword}\n");
 
-                  SocketManager.receive().then((response) {
-                    SocketManager.send("{action=leaderBoard}\n");
+                  // receive user
+                  dynamic response = await SocketManager.receive();
+                  Provider.of<User>(context, listen: false)
+                      .setAll(username, double.parse(response["money"]));
 
-                    Provider.of<User>(context, listen: false)
-                        .setAll(username, double.parse(response["money"]));
+                  SocketManager.send("{action=leaderBoard}\n");
+                  // receive leaderboard
+                  response = await SocketManager.receive();
+                  Provider.of<Leaderboard>(context, listen: false).leaderboard =
+                      response["leaderboard"];
 
-                    SocketManager.receive().then((response) {
-                      Provider.of<Leaderboard>(context, listen: false)
-                          .leaderboard = response["leaderboard"];
-
-                      context.go('/home');
-                    });
-                  });
+                  context.go('/home');
                 },
               )),
           const SizedBox(

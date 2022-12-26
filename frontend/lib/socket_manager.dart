@@ -15,7 +15,6 @@ class SocketManager {
     debugPrint("Connected with :: ${SocketManager.socket?.remoteAddress}");
 
     SocketManager.socket?.listen(
-      // dati ricevuti
       (Uint8List data) {
         final message = String.fromCharCodes(data);
         debugPrint("Received :: $message");

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:money/socket_manager.dart';
 import 'package:provider/provider.dart';
@@ -22,27 +24,25 @@ class LobbyScreenState extends State<LobbyScreen> {
   stayUntilFull() async {
     bool flag = true;
     while (flag) {
-      await SocketManager.receive().then((value) async {
-        //CHECK IF IS ROLE MESSAGE
-        if (value.containsKey("playerRole")) {
-          Provider.of<Game>(context, listen: false).role = value["playerRole"];
+      dynamic message = await SocketManager.receive();
 
-          await SocketManager.receive().then((value) {
-            Provider.of<Game>(context, listen: false).miniGame =
-                value["miniGame"];
-            Provider.of<Game>(context, listen: false).miniGameRules =
-                value["miniGameRules"];
+      if (message.containsKey("playerRole")) {
+        Provider.of<Game>(context, listen: false).role = message["playerRole"];
 
-            flag = false;
-            context.go("/game");
-          });
-        } else {
-          setState(() {
-            Provider.of<Game>(context, listen: false).players =
-                value["players"];
-          });
-        }
-      });
+        message = await SocketManager.receive();
+        Provider.of<Game>(context, listen: false).miniGame =
+            message["miniGame"];
+        Provider.of<Game>(context, listen: false).miniGameRules =
+            message["miniGameRules"];
+
+        flag = false;
+        context.go("/game");
+      } else {
+        setState(() {
+          Provider.of<Game>(context, listen: false).players =
+              message["players"];
+        });
+      }
     }
   }
 
