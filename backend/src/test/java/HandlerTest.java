@@ -24,8 +24,8 @@ public class HandlerTest extends TestCase {
         super.setUp();
         requestMap = new HashMap<>();
         requestMap.put("action","login");
-        requestMap.put("username","admin");
-        requestMap.put("password","admin");
+        requestMap.put("username","francescoamico");
+        requestMap.put("password","4dcade0ce3f56d21113300225dff77378b672f4151de40b2a755346ac9fc45f0");
         assertNotNull(requestMap);
     }
 
@@ -53,7 +53,7 @@ public class HandlerTest extends TestCase {
             resp.put("money", doc.get("money").toString()); //bank account
         }
 
-        assertEquals(new Gson().toJson(resp),"{\"money\":\"100\",\"username\":\"admin\"}"); //the user is in the collection
+        assertEquals(new Gson().toJson(resp),"{\"money\":\"100\",\"username\":\"francescoamico\"}"); //the user is in the collection
     }
 
     public void testNewParty(){
