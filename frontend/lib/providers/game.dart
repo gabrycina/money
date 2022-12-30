@@ -7,6 +7,7 @@ class Game with ChangeNotifier {
   String _miniGame = "";
   String _miniGameRules = "";
   int _timestamp = 0;
+  int _round = 1;
 
   String get code => _code;
   List<String> get players => _players;
@@ -14,8 +15,12 @@ class Game with ChangeNotifier {
   String get miniGame => _miniGame;
   String get miniGameRules => _miniGameRules;
   int get timestamp => _timestamp;
+  int get round => _round;
 
-  void setAll(String u, double m) {}
+  set round(int value) {
+    _round = value;
+    notifyListeners();
+  }
 
   set code(String value) {
     _code = value;

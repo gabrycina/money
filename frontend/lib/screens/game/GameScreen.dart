@@ -18,6 +18,8 @@ class GameScreenState extends State<GameScreen> {
   /// Creates a [GameScreen].
   Timer? countdownTimer;
   Duration myDuration = const Duration(minutes: 3);
+  final optionController = TextEditingController();
+  bool answered = false;
 
   @override
   void initState() {
@@ -27,7 +29,7 @@ class GameScreenState extends State<GameScreen> {
         const Duration(minutes: 3) -
         Duration(milliseconds: DateTime.now().millisecondsSinceEpoch);
 
-    print(myDuration);
+    debugPrint(myDuration.toString());
     startTimer();
   }
 
@@ -51,6 +53,22 @@ class GameScreenState extends State<GameScreen> {
 
   String timeLeft() {
     return "${myDuration.inMinutes.toString().padLeft(2, '0')}:${myDuration.inSeconds.remainder(60).toString().padLeft(2, '0')}";
+  }
+
+  String? validate(BuildContext context) {
+    final text = optionController.value.text;
+    if (text.isNotEmpty) {
+      //TODO Validate input
+      switch (Provider.of<Game>(context, listen: false).miniGame) {
+        case "Max":
+          var value = int.tryParse(text) ?? -1;
+          if (value < 0 || value > 20) {
+            return "This option is not valid";
+          }
+          break;
+      }
+    }
+    return null;
   }
 
   late MediaQueryData queryData;
@@ -136,58 +154,48 @@ class GameScreenState extends State<GameScreen> {
             ],
           ),
         ),
-        Column(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  AnimatedButton(
-                      color: Colors.purple,
-                      width: queryData.size.width / 2.5,
-                      onPressed: () {},
-                      child: const Text(
-                        "A",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      )),
-                  AnimatedButton(
-                      color: Colors.purple,
-                      width: queryData.size.width / 2.5,
-                      onPressed: () {},
-                      child: const Text(
-                        "B",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ))
-                ],
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+              child: SizedBox(
+                width: 150,
+                child: TextField(
+                  controller: optionController,
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                  onChanged: (_) => setState(() {}),
+                  decoration: InputDecoration(
+                      labelText: 'Option', errorText: validate(context)),
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  AnimatedButton(
-                      color: Colors.purple,
-                      width: queryData.size.width / 2.5,
-                      onPressed: () {},
-                      child: const Text(
-                        "C",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      )),
-                  AnimatedButton(
-                      color: Colors.purple,
-                      width: queryData.size.width / 2.5,
-                      onPressed: () {},
-                      child: const Text(
-                        "D",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ))
-                ],
+            AnimatedButton(
+              width: 100,
+              height: 50,
+              enabled: !answered,
+              color: Colors.purple,
+              child: const Text(
+                'SEND',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
+              onPressed: () {
+                final option = optionController.value.text;
+                if (option.isNotEmpty && validate(context) == null) {
+                  SocketManager.send("{option=$option}\n");
+                  setState(() {
+                    answered = true;
+                  });
+                  // SocketManager.receive()
+                }
+              },
             )
           ],
-        )
+        ),
       ]),
     );
   }
