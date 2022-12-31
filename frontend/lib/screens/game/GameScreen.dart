@@ -56,14 +56,39 @@ class GameScreenState extends State<GameScreen> {
   }
 
   String? validate(BuildContext context) {
-    final text = optionController.value.text;
+    String text = optionController.value.text;
+    double bankAccount = Provider.of<Game>(context, listen: false).money;
+    int round = Provider.of<Game>(context, listen: false).round;
+    int boosted = Provider.of<Game>(context, listen: false).boosted ? 1 : 0;
+    const errorMessage = "This option is not valid";
     if (text.isNotEmpty) {
-      //TODO Validate input
       switch (Provider.of<Game>(context, listen: false).miniGame) {
         case "Max":
           var value = int.tryParse(text) ?? -1;
           if (value < 0 || value > 20) {
-            return "This option is not valid";
+            return errorMessage;
+          }
+          break;
+        case "Min":
+          var value = int.tryParse(text) ?? -1;
+          if (value < 1 || value > 4) {
+            return errorMessage;
+          }
+          break;
+        case "Split":
+          double value = double.tryParse(text) ?? -1;
+          if (value < 0 || value > bankAccount) {
+            return errorMessage;
+          }
+          break;
+        case "ChoosePrize":
+          dynamic prices = {
+            1: ["0", "50", "100", "M"],
+            2: ["-50", "100", "500", "M"],
+            3: ["100", "250", "500", "2M"],
+          };
+          if (!prices[round + boosted].contains(text)) {
+            return errorMessage;
           }
           break;
       }
@@ -82,8 +107,8 @@ class GameScreenState extends State<GameScreen> {
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
-        title: const Text("Game",
-            style: TextStyle(fontSize: 35, color: Colors.white)),
+        title: Text("${Provider.of<Game>(context).money}\$",
+            style: const TextStyle(fontSize: 35, color: Colors.white)),
       ),
       body:
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
