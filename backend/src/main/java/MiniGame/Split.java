@@ -16,7 +16,7 @@ public class Split extends MiniGame {
         Map<String,String> json;
         // send rules;
         json = new HashMap<>();
-        json.put("miniGame","ChoosePrize");
+        json.put("miniGame","Split");
         json.put("miniGameRules", this.getRules());
         this.reportToAll(json);
 
