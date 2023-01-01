@@ -11,6 +11,13 @@ class Game with ChangeNotifier {
   double _money = 125.73;
   bool _boosted = false;
 
+  static const dynamic defaultOption = {
+    "Max": "0",
+    "Min": "1",
+    "ChoosePrize": "100",
+    "Split": "0"
+  };
+
   String get code => _code;
   List<String> get players => _players;
   String get role => _role;

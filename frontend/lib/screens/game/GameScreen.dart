@@ -45,6 +45,10 @@ class GameScreenState extends State<GameScreen> {
       if (seconds < 0) {
         countdownTimer!.cancel();
         debugPrint("Timer :: tempo scaduto");
+        if (!answered) {
+          answerAndListen(Game.defaultOption[
+              Provider.of<Game>(context, listen: false).miniGame]);
+        }
       } else {
         myDuration = Duration(seconds: seconds);
       }
@@ -55,7 +59,7 @@ class GameScreenState extends State<GameScreen> {
     return "${myDuration.inMinutes.toString().padLeft(2, '0')}:${myDuration.inSeconds.remainder(60).toString().padLeft(2, '0')}";
   }
 
-  String? validate(BuildContext context) {
+  String? validate() {
     String text = optionController.value.text;
     double bankAccount = Provider.of<Game>(context, listen: false).money;
     int round = Provider.of<Game>(context, listen: false).round;
@@ -94,6 +98,14 @@ class GameScreenState extends State<GameScreen> {
       }
     }
     return null;
+  }
+
+  void answerAndListen(String option) {
+    SocketManager.send("{option=$option}\n");
+    setState(() {
+      answered = true;
+    });
+    // SocketManager.receive()
   }
 
   late MediaQueryData queryData;
@@ -187,11 +199,12 @@ class GameScreenState extends State<GameScreen> {
               child: SizedBox(
                 width: 150,
                 child: TextField(
+                  enabled: !answered,
                   controller: optionController,
                   style: const TextStyle(fontSize: 20, color: Colors.white),
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
-                      labelText: 'Option', errorText: validate(context)),
+                      labelText: 'Option', errorText: validate()),
                 ),
               ),
             ),
@@ -210,12 +223,8 @@ class GameScreenState extends State<GameScreen> {
               ),
               onPressed: () {
                 final option = optionController.value.text;
-                if (option.isNotEmpty && validate(context) == null) {
-                  SocketManager.send("{option=$option}\n");
-                  setState(() {
-                    answered = true;
-                  });
-                  // SocketManager.receive()
+                if (option.isNotEmpty && validate() == null) {
+                  answerAndListen(option);
                 }
               },
             )
