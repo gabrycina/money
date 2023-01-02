@@ -1,10 +1,41 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/providers/game.dart';
 import 'package:animated_button/animated_button.dart';
+import 'package:money/socket_manager.dart';
 
-class SplitScreen extends StatelessWidget {
+class SplitScreen extends StatefulWidget {
   const SplitScreen({super.key});
+
+  @override
+  State<SplitScreen> createState() => _SplitScreenState();
+}
+
+class _SplitScreenState extends State<SplitScreen> {
+  bool answered = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void answerAndListen(bool split) async {
+    setState(() {
+      answered = true;
+    });
+
+    SocketManager.send('{"split":"${split.toString()}"}\n');
+    dynamic response = await SocketManager.receive();
+    if (split) {
+      Provider.of<Game>(context, listen: false).lastPrize =
+          double.parse(response["prize"]);
+      // context.go('/winner');
+    } else {
+      // context.go('/winner');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +57,7 @@ class SplitScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: AnimatedButton(
+                enabled: !answered,
                 width: 100,
                 height: 50,
                 color: Colors.green,
@@ -37,12 +69,15 @@ class SplitScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  answerAndListen(true);
+                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: AnimatedButton(
+                enabled: !answered,
                 width: 100,
                 height: 50,
                 color: Colors.redAccent,
@@ -54,7 +89,9 @@ class SplitScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  answerAndListen(false);
+                },
               ),
             ),
           ],

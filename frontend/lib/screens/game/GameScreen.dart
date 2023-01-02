@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
-
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:money/socket_manager.dart';
@@ -38,6 +36,12 @@ class GameScreenState extends State<GameScreen> {
   void startTimer() {
     countdownTimer =
         Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  @override
+  void dispose() {
+    optionController.dispose();
+    super.dispose();
   }
 
   void setCountDown() {
