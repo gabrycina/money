@@ -1,7 +1,6 @@
 package Handler;
 
 import Player.User;
-import com.google.gson.Gson;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
@@ -32,7 +31,6 @@ public class Handler implements Runnable {
         String action;
         do {
             this.json = Json.readJson(this.CLIENT_SOCKET);
-            System.out.println("server receive --> "+new Gson().toJson(this.json));
             action = this.json.get("action");
             switch (action) {
                 case "login" -> this.loginHandler();

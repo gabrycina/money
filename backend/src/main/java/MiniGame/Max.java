@@ -30,7 +30,6 @@ public class Max extends MiniGame {
                 json.put("prize", "0");
                 this.reportToAll(json);
             }else {
-                this.lastPrize = 100+400*(this.round-1);
                 if(this.round==2) this.lastWinner.addToken();
                 json.put("winner", "true");
                 json.put("prize", Double.valueOf(this.lastPrize).toString());
@@ -60,10 +59,12 @@ public class Max extends MiniGame {
         Map<String,String> json;
         Map<Integer,List<Player>> options = new HashMap<>();
         int option;
+        double sumOption = 0;
 
         for (Player player:this.players){
             json = player.read();
             option = Integer.parseInt(json.get("option"));
+            sumOption += option;
 
             List<Player> list = options.get(option);
             if (list == null)
@@ -71,7 +72,7 @@ public class Max extends MiniGame {
             list.add(player);
 
             options.put(option,list);
-            this.lastAnswer.put("player", String.valueOf(option));
+            this.lastAnswer.put(player.getUsername(), String.valueOf(option));
         }
 
         int res = options.entrySet().stream()
@@ -80,6 +81,8 @@ public class Max extends MiniGame {
 
         if (res != -1) this.lastWinner=options.get(res).get(0);
         else this.lastWinner = null;
+
+        this.lastPrize = (100+400*(this.round-1))/sumOption;
     }
 
     @Override

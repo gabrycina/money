@@ -17,6 +17,7 @@ public class Json {
         try {
             json = new BufferedReader(new InputStreamReader(client.getInputStream()))
                     .readLine();
+            System.out.println("server receive --> "+json);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,6 +28,7 @@ public class Json {
         try {
             new PrintWriter(client.getOutputStream(), true)
                     .println(new Gson().toJson(json));
+            System.out.println("server send --> "+new Gson().toJson(json));
         } catch (IOException e) {
             e.printStackTrace();
         }

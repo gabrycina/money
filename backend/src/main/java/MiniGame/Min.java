@@ -31,7 +31,6 @@ public class Min extends MiniGame {
                 json.put("prize", "0");
                 this.reportToAll(json);
             }else {
-                this.lastPrize = 50*this.round;
                 if(this.round==2) this.lastWinner.addToken();
                 json.put("winner", "true");
                 json.put("prize", Double.valueOf(this.lastPrize).toString());
@@ -61,10 +60,12 @@ public class Min extends MiniGame {
         Map<String,String> json;
         Map<Integer,List<Player>> options = new HashMap<>();
         int option;
+        int minOption = Integer.MAX_VALUE;
 
         for (Player player:this.players){ //vince primo con option massimo
             json = player.read();
             option = Integer.parseInt(json.get("option"));
+            minOption = Math.min(minOption,option);
 
             List<Player> list = options.get(option);
             if (list == null)
@@ -72,7 +73,7 @@ public class Min extends MiniGame {
             list.add(player);
 
             options.put(option,list);
-            this.lastAnswer.put("player", String.valueOf(option));
+            this.lastAnswer.put(player.getUsername(), String.valueOf(option));
         }
 
         int res = options.entrySet().stream()
@@ -81,6 +82,8 @@ public class Min extends MiniGame {
 
         if (res != -1) this.lastWinner = options.get(res).get(0);
         else this.lastWinner = null;
+
+        this.lastPrize = 50*this.round*minOption;
     }
 
     @Override

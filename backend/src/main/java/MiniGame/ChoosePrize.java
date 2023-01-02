@@ -64,7 +64,7 @@ public class ChoosePrize extends MiniGame {
             list.add(player);
 
             options.put(option,list);
-            this.lastAnswer.put("player", String.valueOf(option));
+            this.lastAnswer.put(player.getUsername(), String.valueOf(option));
         }
 
         json = new HashMap<>();
