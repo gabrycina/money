@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:animated_button/animated_button.dart';
@@ -100,12 +102,20 @@ class GameScreenState extends State<GameScreen> {
     return null;
   }
 
-  void answerAndListen(String option) {
+  void answerAndListen(String option) async {
     SocketManager.send("{option=$option}\n");
     setState(() {
       answered = true;
     });
-    // SocketManager.receive()
+    dynamic response = await SocketManager.receive();
+
+    // TODO response["prize"] could be a Medal
+    Provider.of<Game>(context, listen: false).lastPrize =
+        double.parse(response["prize"]);
+
+    if (response["winner"] == "true") {
+      context.go("/split");
+    }
   }
 
   late MediaQueryData queryData;

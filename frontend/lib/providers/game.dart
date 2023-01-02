@@ -10,6 +10,7 @@ class Game with ChangeNotifier {
   int _round = 2;
   double _money = 125.73;
   bool _boosted = false;
+  double _lastPrize = 0.0;
 
   static const dynamic defaultOption = {
     "Max": "0",
@@ -27,6 +28,12 @@ class Game with ChangeNotifier {
   int get round => _round;
   double get money => _money;
   bool get boosted => _boosted;
+  double get lastPrize => _lastPrize;
+
+  set lastPrize(double value) {
+    _lastPrize = value;
+    notifyListeners();
+  }
 
   set boosted(bool value) {
     _boosted = value;
