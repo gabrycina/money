@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '/providers/game.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:money/socket_manager.dart';
+import 'package:go_router/go_router.dart';
 
 class SplitScreen extends StatefulWidget {
   const SplitScreen({super.key});
@@ -31,9 +32,9 @@ class _SplitScreenState extends State<SplitScreen> {
     if (split) {
       Provider.of<Game>(context, listen: false).lastPrize =
           double.parse(response["prize"]);
-      // context.go('/winner');
+      context.go('/winner');
     } else {
-      // context.go('/winner');
+      context.go('/winner');
     }
   }
 

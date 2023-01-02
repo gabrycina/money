@@ -7,6 +7,7 @@ import 'package:money/screens/lobby/LobbyScreen.dart';
 import 'package:money/screens/login/LoginScreen.dart';
 import 'package:money/screens/rules/RulesScreen.dart';
 import 'package:money/screens/split/SplitScreen.dart';
+import 'package:money/screens/winner/WinnerScreen.dart';
 import 'package:money/screens/welcome/WelcomeScreen.dart';
 import 'package:money/socket_manager.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +72,11 @@ class App extends StatelessWidget {
         path: '/split',
         builder: (BuildContext context, GoRouterState state) =>
             const SplitScreen(),
+      ),
+      GoRoute(
+        path: '/winner',
+        builder: (BuildContext context, GoRouterState state) =>
+            const WinnerScreen(),
       )
     ],
   );

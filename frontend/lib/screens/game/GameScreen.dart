@@ -38,11 +38,16 @@ class GameScreenState extends State<GameScreen> {
         Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
   }
 
-  @override
+  void stopTimer() {
+    countdownTimer!.cancel();
+  }
+
+  /*@override
   void dispose() {
+    stopTimer();
     optionController.dispose();
     super.dispose();
-  }
+  }*/
 
   void setCountDown() {
     const reduceSecondsBy = 1;
@@ -112,13 +117,15 @@ class GameScreenState extends State<GameScreen> {
       answered = true;
     });
     dynamic response = await SocketManager.receive();
-
+    stopTimer();
     // TODO response["prize"] could be a Medal
     Provider.of<Game>(context, listen: false).lastPrize =
         double.parse(response["prize"]);
 
     if (response["winner"] == "true") {
       context.go("/split");
+    } else {
+      context.go("/winner");
     }
   }
 

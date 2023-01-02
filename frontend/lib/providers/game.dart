@@ -7,7 +7,7 @@ class Game with ChangeNotifier {
   String _miniGame = "";
   String _miniGameRules = "";
   int _timestamp = 0;
-  int _round = 2;
+  int _round = 1;
   double _money = 0.0;
   bool _boosted = false;
   double _lastPrize = 0.0;
