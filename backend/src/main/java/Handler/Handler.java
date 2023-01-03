@@ -92,10 +92,11 @@ public class Handler implements Runnable {
     }
 
     private void newPartyHandler() {
-        MockRedis games = MockRedis.getDb();
         Game game;
-        synchronized (this) { //race condition per id
-            game = new Game();
+        MockRedis games;
+        synchronized (this) {
+            games = MockRedis.getDb(); //threads can create more than one singleton object
+            game = new Game();//race condition per id
         }
         String id = game.getId();
         games.putGame(id,game);
