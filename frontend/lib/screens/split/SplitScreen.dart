@@ -23,10 +23,6 @@ class _SplitScreenState extends State<SplitScreen> {
   }
 
   void answerAndListen(bool split) async {
-    setState(() {
-      answered = true;
-    });
-
     SocketManager.send('{"split":"${split.toString()}"}\n');
     dynamic response = await SocketManager.receive();
     if (split) {

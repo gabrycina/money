@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '/providers/game.dart';
 import 'package:animated_button/animated_button.dart';
@@ -13,10 +14,24 @@ class WinnerScreen extends StatefulWidget {
 
 class _WinnerScreenState extends State<WinnerScreen> {
   double prize = 0.0;
+  String nextStep = "false";
 
   @override
   void initState() {
     super.initState();
+    SocketManager.send("{username='', prize='0'}\n");
+  }
+
+  void listenAndSuperpower() async {
+    await SocketManager.receive().then((response) async {
+      print(response);
+      if (response["nextStep"] == "true") {
+        context.go("/superpower");
+      } else {
+        // ignore: avoid_print
+        print("Next step is not true");
+      }
+    });
   }
 
   @override
@@ -46,14 +61,16 @@ class _WinnerScreenState extends State<WinnerScreen> {
               width: 70,
               height: 50,
               child: const Text(
-                "next",
+                "NEXT",
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                listenAndSuperpower();
+              },
             ),
           ),
         ],
