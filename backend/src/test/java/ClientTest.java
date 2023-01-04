@@ -34,7 +34,7 @@ public class ClientTest extends TestCase {
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-        String req = "{action=login, username=francescoamico, password=4dcade0ce3f56d21113300225dff77378b672f4151de40b2a755346ac9fc45f0}";
+        String req = "{\"action\":\"login\", \"username\":\"francescoamico\", \"password\":\"4dcade0ce3f56d21113300225dff77378b672f4151de40b2a755346ac9fc45f0\"}";
         out.println(req);
         out.flush();
 

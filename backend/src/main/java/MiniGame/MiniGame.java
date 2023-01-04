@@ -39,7 +39,7 @@ public abstract class MiniGame {
         for (Player player:this.players){
             Map<String,String> json = player.read();
             String username = json.get("username");
-            if (!username.equals("")){
+            if (username.length()!=0){
                 double money = Double.parseDouble(json.get("prize"));
                 player.addProfit(-money);
                 final Map<String, String> finalJson = new HashMap<>();

@@ -73,6 +73,7 @@ public class Handler implements Runnable {
     }
 
     private void loginHandler() {
+        System.out.println(this.json.get("campo").length()==0);
         Bson filter = Filters.and(Filters.eq("username", this.json.get("username")),
                                     Filters.eq("password", this.json.get("password")));
         Document doc = Mongodb.USERS.find(filter).first(); // unique username
