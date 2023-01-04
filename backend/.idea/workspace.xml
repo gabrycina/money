@@ -44,7 +44,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.ClientTest.testCreatePartyRequest">
+  <component name="RunManager">
     <configuration name="ClientTest.testCreatePartyRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />
