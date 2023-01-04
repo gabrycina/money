@@ -60,7 +60,7 @@ public class Split extends MiniGame {
             player.addProfit(-Double.parseDouble(option));
             this.lastAnswer.put(player.getUsername(),option);
         }
-        final double finalBox = (box + box*(0.25*this.round))/this.players.size();
+        final double finalBox = Math.round(((box + box*(0.25*this.round))/this.players.size())*100)/100.0;
         this.players.forEach(p->{
             p.addProfit(finalBox);
             //reportToAll needs O(n) time. It's better notify all here.
@@ -69,6 +69,7 @@ public class Split extends MiniGame {
             prize.put("prize", Double.valueOf(finalBox).toString());
             p.write(prize);
         });
+        this.lastWinner = null; //there is no winner
     }
 
     @Override

@@ -62,7 +62,7 @@ public class Min extends MiniGame {
         int option;
         int minOption = Integer.MAX_VALUE;
 
-        for (Player player:this.players){ //vince primo con option massimo
+        for (Player player:this.players){
             json = player.read();
             option = Integer.parseInt(json.get("option"));
             minOption = Math.min(minOption,option);

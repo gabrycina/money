@@ -82,7 +82,7 @@ public class Max extends MiniGame {
         if (res != -1) this.lastWinner=options.get(res).get(0);
         else this.lastWinner = null;
 
-        this.lastPrize = (100+400*(this.round-1))/sumOption;
+        this.lastPrize = Math.round(((100+400*(this.round-1))/sumOption)*100)/100.0;
     }
 
     @Override

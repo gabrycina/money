@@ -67,6 +67,7 @@ public class ChoosePrize extends MiniGame {
             this.lastAnswer.put(player.getUsername(), String.valueOf(option));
         }
 
+        this.lastWinner = null; //there is no winner
         json = new HashMap<>();
         json.put("winner","false");
         double prize;
