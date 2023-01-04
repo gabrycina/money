@@ -92,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                   SocketManager.send({
                     "action": "login",
                     "username": username,
-                    "password": digestPassword
+                    "password": digestPassword.toString()
                   });
 
                   // receive user

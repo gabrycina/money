@@ -21,7 +21,7 @@ class _WinnerScreenState extends State<WinnerScreen> {
   @override
   void initState() {
     super.initState();
-    SocketManager.send({"username": "\0", "prize": "\0"});
+    SocketManager.send({"username": "", "prize": ""});
   }
 
   void listenAndSuperpower() async {
