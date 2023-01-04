@@ -10,6 +10,8 @@ import 'package:money/screens/split/SplitScreen.dart';
 import 'package:money/screens/superpower/SuperpowerScreen.dart';
 import 'package:money/screens/winner/WinnerScreen.dart';
 import 'package:money/screens/welcome/WelcomeScreen.dart';
+import 'package:money/screens/wait/WaitScreen.dart';
+import 'package:money/screens/result/ResultScreen.dart';
 import 'package:money/socket_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -83,6 +85,16 @@ class App extends StatelessWidget {
         path: '/superpower',
         builder: (BuildContext context, GoRouterState state) =>
             const SuperpowerScreen(),
+      ),
+      GoRoute(
+        path: "/wait",
+        builder: (BuildContext context, GoRouterState state) =>
+            const WaitScreen(),
+      ),
+      GoRoute(
+        path: "/result",
+        builder: (BuildContext context, GoRouterState state) =>
+            const ResultScreen(),
       )
     ],
   );

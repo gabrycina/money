@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -23,15 +25,22 @@ class _WinnerScreenState extends State<WinnerScreen> {
   }
 
   void listenAndSuperpower() async {
-    await SocketManager.receive().then((response) async {
-      print(response);
-      if (response["nextStep"] == "true") {
+    dynamic response = await SocketManager.receive();
+    // if minigame == ChosePrize we receive boost
+    //TODO add boost to Game
+    if (Provider.of<Game>(context, listen: false).miniGame == "ChoosePrize") {
+      response = await SocketManager.receive();
+    }
+
+    if (response["nextStep"] == "true") {
+      if (Provider.of<Game>(context, listen: false).sup) {
         context.go("/superpower");
       } else {
-        // ignore: avoid_print
-        print("Next step is not true");
+        context.go("/wait");
       }
-    });
+    } else {
+      debugPrint("Next step is not true");
+    }
   }
 
   @override
