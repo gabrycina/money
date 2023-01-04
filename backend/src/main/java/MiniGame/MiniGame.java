@@ -23,9 +23,9 @@ public abstract class MiniGame {
         Map<String, String> json = new HashMap<>();
         json.put("winner", "false");
         if(this.lastWinner.read().get("split").equals("true")){
-            json.put("prize", Double.valueOf(Math.round(this.lastPrize/this.players.size()*100)/100.0).toString());
+            json.put("prize", Double.valueOf(Math.round((this.lastPrize/this.players.size())*100)/100.0).toString());
             this.players.forEach(p -> {
-                p.addProfit(Math.round(this.lastPrize/this.players.size()*100)/100.0); // truncate to 2 decimal places
+                p.addProfit(Math.round((this.lastPrize/this.players.size())*100)/100.0); // truncate to 2 decimal places
                 p.write(json); //reportToAll needs O(n) time. It's better notify all here.
             });
         }else{
