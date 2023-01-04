@@ -89,15 +89,18 @@ class LoginScreen extends StatelessWidget {
                   var bytes1 = utf8.encode(password); // data being hashed
                   var digestPassword = sha256.convert(bytes1);
 
-                  SocketManager.send(
-                      "{action=login,username=$username,password=$digestPassword}\n");
+                  SocketManager.send({
+                    "action": "login",
+                    "username": username,
+                    "password": digestPassword
+                  });
 
                   // receive user
                   dynamic response = await SocketManager.receive();
                   Provider.of<User>(context, listen: false)
                       .setAll(username, double.parse(response["money"]));
 
-                  SocketManager.send("{action=leaderBoard}\n");
+                  SocketManager.send({"action": "leaderBoard"});
                   // receive leaderboard
                   response = await SocketManager.receive();
                   Provider.of<Leaderboard>(context, listen: false).leaderboard =

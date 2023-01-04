@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      SocketManager.send("{action=createParty}\n");
+                      SocketManager.send({"action": "createParty"});
 
                       SocketManager.receive().then((response) {
                         Provider.of<Game>(context, listen: false).code =
@@ -99,8 +99,10 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            SocketManager.send(
-                                "{action=joinParty, code=${partyCodeController.text}}\n");
+                            SocketManager.send({
+                              "action": "joinParty",
+                              "code": partyCodeController.text
+                            });
 
                             SocketManager.receive().then((response) {
                               Provider.of<Game>(context, listen: false).code =

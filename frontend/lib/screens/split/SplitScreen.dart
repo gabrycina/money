@@ -23,7 +23,7 @@ class _SplitScreenState extends State<SplitScreen> {
   }
 
   void answerAndListen(bool split) async {
-    SocketManager.send('{"split":"${split.toString()}"}\n');
+    SocketManager.send({"split": split.toString()});
     dynamic response = await SocketManager.receive();
     if (split) {
       Provider.of<Game>(context, listen: false).lastPrize =

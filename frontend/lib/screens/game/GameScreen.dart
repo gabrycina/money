@@ -112,7 +112,7 @@ class GameScreenState extends State<GameScreen> {
   }
 
   void answerAndListen(String option) async {
-    SocketManager.send("{option=$option}\n");
+    SocketManager.send({"option": option});
     setState(() {
       answered = true;
     });

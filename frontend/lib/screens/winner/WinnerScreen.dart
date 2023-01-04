@@ -19,7 +19,7 @@ class _WinnerScreenState extends State<WinnerScreen> {
   @override
   void initState() {
     super.initState();
-    SocketManager.send("{username='', prize='0'}\n");
+    SocketManager.send({"username": "\0", "prize": "\0"});
   }
 
   void listenAndSuperpower() async {
@@ -36,9 +36,11 @@ class _WinnerScreenState extends State<WinnerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<Game>(context).money += Provider.of<Game>(context).lastPrize;
-    prize += Provider.of<Game>(context).lastPrize;
-    Provider.of<Game>(context).lastPrize = 0.0;
+    Provider.of<Game>(context, listen: false).money +=
+        Provider.of<Game>(context, listen: false).lastPrize;
+    prize += Provider.of<Game>(context, listen: false).lastPrize;
+    Provider.of<Game>(context, listen: false).lastPrize = 0.0;
+    // queste creano un eccezione andrebbero spostate in Game/Split
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 60, 42, 69),
       appBar: AppBar(

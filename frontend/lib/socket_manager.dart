@@ -34,8 +34,8 @@ class SocketManager {
     );
   }
 
-  static void send(String message) {
-    SocketManager.socket?.write(message);
+  static void send(dynamic message) {
+    SocketManager.socket?.write("${message.toString()}\n");
     debugPrint("Sent :: $message");
   }
 
