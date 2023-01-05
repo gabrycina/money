@@ -18,17 +18,17 @@ public class Robber extends Player {
 
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
-        System.out.println("sono dentro");
+        String username = this.read().get("username");
         Player target = players.stream()
-                .filter(p->p.getUsername().equals(this.read().get("username")))
+                .filter(p->p.getUsername().equals(username))
                 .findFirst().orElse(this);
-        System.out.println("sono al centro");
+
         double loot = target.getProfit()*0.05;
         target.addProfit(-loot);
         this.addProfit(loot);
+
         Map<String,String> json = new HashMap<>();
         json.put("result",Double.valueOf(loot).toString());
-        System.out.println("sto per scrivere");
         this.write(json);
     }
 }

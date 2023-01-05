@@ -18,14 +18,13 @@ public class Spy extends Player {
 
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
-        System.out.println("sono dentro");
+        String username = this.read().get("username");
         Player target = players.stream()
-                .filter(p->p.getUsername().equals(this.read().get("username")))
+                .filter(p->p.getUsername().equals(username))
                 .findFirst().orElse(this);
-        System.out.println("sono al centro");
+
         Map<String,String> bankAccount = new HashMap<>();
         bankAccount.put("result",Double.valueOf(target.getProfit()).toString());
-        System.out.println("sto per scrivere");
         this.write(bankAccount);
     }
 }
