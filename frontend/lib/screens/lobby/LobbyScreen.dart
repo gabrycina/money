@@ -26,7 +26,11 @@ class LobbyScreenState extends State<LobbyScreen> {
     while (flag) {
       dynamic message = await SocketManager.receive();
 
-      if (message.containsKey("playerRole")) {
+      debugPrint(Provider.of<Game>(context, listen: false).players[2]);
+
+      if (message.containsKey("players")) {
+        Provider.of<Game>(context, listen: false).players = message["players"];
+      } else if (message.containsKey("playerRole")) {
         Provider.of<Game>(context, listen: false).role = message["playerRole"];
 
         message = await SocketManager.receive();
