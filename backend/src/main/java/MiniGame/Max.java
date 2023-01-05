@@ -45,6 +45,7 @@ public class Max extends MiniGame {
             // check if the player wants to use superpower
             for (Player player:this.players) {
                 json = player.read();
+                System.out.println(player.getRole()+" "+player.getUsername());
                 if (json.get("useSuperPower").equals("true"))
                     player.useSuperPower(players,this.lastWinner,this.lastAnswer);
             }
