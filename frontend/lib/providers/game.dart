@@ -36,61 +36,61 @@ class Game with ChangeNotifier {
 
   set supResult(String value) {
     _supResult = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set sup(bool value) {
     _sup = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set lastPrize(double value) {
     _lastPrize = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set boosted(bool value) {
     _boosted = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set money(double value) {
     _money = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set round(int value) {
     _round = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set code(String value) {
     _code = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set players(List<dynamic> value) {
     _players = List<String>.from(value);
-    notifyListeners();
+    //notifyListeners();
   }
 
   set role(String value) {
     _role = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set miniGame(String value) {
     _miniGame = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set miniGameRules(String value) {
     _miniGameRules = value;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set timestamp(int value) {
     _timestamp = value;
-    notifyListeners();
+    //notifyListeners();
   }
 }
