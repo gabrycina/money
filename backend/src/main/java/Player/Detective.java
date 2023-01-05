@@ -18,9 +18,12 @@ public class Detective extends Player {
 
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
+        System.out.println("sono dentro");
         Map<String,String> json = new HashMap<>();
+        System.out.println("sono al centro");
         if (lastWinner==null) json.put("result","nobody");
         else json.put("result",lastWinner.getUsername());
+        System.out.println("sto per scrivere");
         this.write(json);
     }
 }

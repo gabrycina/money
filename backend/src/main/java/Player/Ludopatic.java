@@ -18,12 +18,15 @@ public class Ludopatic extends Player {
 
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
+        System.out.println("sono dentro");
         Player target = players.stream()
                 .filter(p->p.getUsername().equals(this.read().get("username")))
                 .findFirst().orElse(this);
         this.addProfit(target.getProfit()*0.1);
+        System.out.println("sono al centro");
         Map<String,String> json = new HashMap<>();
         json.put("result",Double.valueOf(target.getProfit()*0.1).toString());
+        System.out.println("sto per scrivere");
         this.write(json);
     }
 }

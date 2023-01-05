@@ -18,6 +18,7 @@ public class Robber extends Player {
 
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
+        System.out.println("sono dentro");
         Player target = players.stream()
                 .filter(p->p.getUsername().equals(this.read().get("username")))
                 .findFirst().orElse(this);
@@ -25,9 +26,10 @@ public class Robber extends Player {
         double loot = target.getProfit()*0.05;
         target.addProfit(-loot);
         this.addProfit(loot);
-
+        System.out.println("sono al centro");
         Map<String,String> json = new HashMap<>();
         json.put("result",Double.valueOf(loot).toString());
+        System.out.println("sto per scrivere");
         this.write(json);
     }
 }
