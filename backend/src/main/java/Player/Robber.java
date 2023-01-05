@@ -22,11 +22,10 @@ public class Robber extends Player {
         Player target = players.stream()
                 .filter(p->p.getUsername().equals(this.read().get("username")))
                 .findFirst().orElse(this);
-
+        System.out.println("sono al centro");
         double loot = target.getProfit()*0.05;
         target.addProfit(-loot);
         this.addProfit(loot);
-        System.out.println("sono al centro");
         Map<String,String> json = new HashMap<>();
         json.put("result",Double.valueOf(loot).toString());
         System.out.println("sto per scrivere");

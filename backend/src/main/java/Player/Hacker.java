@@ -18,14 +18,12 @@ public class Hacker extends Player {
 
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
-        System.out.println("sono dentro");
         StringBuilder value = new StringBuilder();
         for(Map.Entry<String,String> entry:lastAnswer.entrySet())
             value.append(entry.getKey()).append(" answered ").append(entry.getValue()).append("\n");
-        System.out.println("sono al centro");
+
         Map<String, String> map = new HashMap<>();
         map.put("result", String.valueOf(value));
-        System.out.println("sto per scrivere");
         this.write(map);
     }
 }
