@@ -36,6 +36,7 @@ class _WinnerScreenState extends State<WinnerScreen> {
       if (Provider.of<Game>(context, listen: false).sup) {
         context.go("/superpower");
       } else {
+        SocketManager.send({"useSuperPower": "false"});
         context.go("/wait");
       }
     } else {

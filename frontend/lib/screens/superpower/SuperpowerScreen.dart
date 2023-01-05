@@ -30,7 +30,9 @@ class _SuperpowerScreenState extends State<SuperpowerScreen> {
     SocketManager.send({"useSuperPower": sup.toString()});
 
     if (sup) {
+      //TODO check for wich role this is
       dynamic response = await SocketManager.receive();
+      Provider.of<Game>(context, listen: false).sup = false;
       Provider.of<Game>(context, listen: false).supResult = response["result"];
       context.go("/result");
     } else {
@@ -48,7 +50,7 @@ class _SuperpowerScreenState extends State<SuperpowerScreen> {
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
-        title: Text("${Provider.of<Game>(context).money}\$",
+        title: Text(Provider.of<Game>(context).role,
             style: const TextStyle(fontSize: 35, color: Colors.white)),
       ),
       body: Column(
@@ -102,7 +104,14 @@ class _SuperpowerScreenState extends State<SuperpowerScreen> {
                 ),
               ),
             ],
-          )
+          ),
+          answered
+              ? Image.asset(
+                  "assets/clessidra.gif",
+                  height: 50,
+                  width: 50,
+                )
+              : Container(),
         ],
       ),
     );
