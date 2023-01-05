@@ -8,6 +8,7 @@ import 'package:money/screens/login/LoginScreen.dart';
 import 'package:money/screens/rules/RulesScreen.dart';
 import 'package:money/screens/split/SplitScreen.dart';
 import 'package:money/screens/superpower/SuperpowerScreen.dart';
+import 'package:money/screens/target/TargetScreen.dart';
 import 'package:money/screens/winner/WinnerScreen.dart';
 import 'package:money/screens/welcome/WelcomeScreen.dart';
 import 'package:money/screens/wait/WaitScreen.dart';
@@ -95,6 +96,11 @@ class App extends StatelessWidget {
         path: "/result",
         builder: (BuildContext context, GoRouterState state) =>
             const ResultScreen(),
+      ),
+      GoRoute(
+        path: "/target",
+        builder: (BuildContext context, GoRouterState state) =>
+            const TargetScreen(),
       )
     ],
   );

@@ -16,6 +16,7 @@ class SuperpowerScreen extends StatefulWidget {
 class _SuperpowerScreenState extends State<SuperpowerScreen> {
   double prize = 0.0;
   bool answered = false;
+  List<String> supNeedTarget = ["Robber", "Spy", "Ludopatic"];
 
   @override
   void initState() {
@@ -30,11 +31,16 @@ class _SuperpowerScreenState extends State<SuperpowerScreen> {
     SocketManager.send({"useSuperPower": sup.toString()});
 
     if (sup) {
-      //TODO check for wich role this is
-      dynamic response = await SocketManager.receive();
-      Provider.of<Game>(context, listen: false).sup = false;
-      Provider.of<Game>(context, listen: false).supResult = response["result"];
-      context.go("/result");
+      if (supNeedTarget
+          .contains(Provider.of<Game>(context, listen: false).role)) {
+        context.go("/target");
+      } else {
+        dynamic response = await SocketManager.receive();
+        Provider.of<Game>(context, listen: false).sup = false;
+        Provider.of<Game>(context, listen: false).supResult =
+            response["result"];
+        context.go("/result");
+      }
     } else {
       context.go("/wait");
     }
