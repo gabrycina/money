@@ -31,12 +31,12 @@ class _SuperpowerScreenState extends State<SuperpowerScreen> {
     SocketManager.send({"useSuperPower": sup.toString()});
 
     if (sup) {
+      Provider.of<Game>(context, listen: false).sup = false;
       if (supNeedTarget
           .contains(Provider.of<Game>(context, listen: false).role)) {
         context.go("/target");
       } else {
         dynamic response = await SocketManager.receive();
-        Provider.of<Game>(context, listen: false).sup = false;
         Provider.of<Game>(context, listen: false).supResult =
             response["result"];
         context.go("/result");

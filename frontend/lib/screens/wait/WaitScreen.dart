@@ -23,10 +23,48 @@ class _WaitScreenState extends State<WaitScreen> {
   }
 
   void waitAll() async {
-    // PRIMA FASE :: Si receve un update sul proprio conto
+    final state = Provider.of<Game>(context, listen: false);
+
+    // PRIMA FASE :: Si receve un update del proprio conto
     dynamic response = await SocketManager.receive();
-    Provider.of<Game>(context, listen: false).money =
-        double.parse(response["bankAccount"]);
+    state.money = double.parse(response["bankAccount"]);
+
+    if (state.round == 2 && state.miniGameCount == 2) {
+      // ************************************
+      // SIAMO ALLA FINE DELL'ULTIMO MINIGAME
+
+      response = await SocketManager.receive();
+      // questo e' il max profit del minigame, per ora non lo usiamo
+
+      response = await SocketManager.receive();
+      // TODO estrapolare leaderboard e briefcase winner
+    } else if (state.round == 2) {
+      // **********************************
+      // SIAMO ALLA FINE DEL PRIMO MINIGAME
+      state.round = 1;
+      state.miniGameCount = 2;
+
+      response = await SocketManager.receive();
+      // questo e' il max profit del minigame, per ora non lo usiamo
+
+      response = await SocketManager.receive();
+      state.miniGame = response["miniGame"];
+      state.miniGameRules = response["miniGameRules"];
+
+      response = await SocketManager.receive();
+      state.timestamp =
+          DateTime.parse(response["timeStamp"]).millisecondsSinceEpoch;
+      context.go("/game");
+    } else {
+      // ****************************************************
+      // ABIAMO FINITO IL PRIMO ROUND DI UNO DEI DUE MINIGAME
+      state.round = 2;
+
+      response = await SocketManager.receive();
+      state.timestamp =
+          DateTime.parse(response["timeStamp"]).millisecondsSinceEpoch;
+      context.go("/game");
+    }
   }
 
   @override
@@ -36,8 +74,8 @@ class _WaitScreenState extends State<WaitScreen> {
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
-        title: Text("${Provider.of<Game>(context).money}\$",
-            style: const TextStyle(fontSize: 35, color: Colors.white)),
+        title: const Text("Wait",
+            style: TextStyle(fontSize: 35, color: Colors.white)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
