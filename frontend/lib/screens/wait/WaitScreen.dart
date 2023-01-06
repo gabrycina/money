@@ -36,11 +36,22 @@ class _WaitScreenState extends State<WaitScreen> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Center(
-            child: Text("Wait",
-                style: TextStyle(fontSize: 35, color: Colors.white)),
-          )
+        children: [
+          const Center(
+            child: Text(
+              "Great job, you were faster...",
+              style: TextStyle(fontSize: 30, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Image.asset(
+              "assets/clessidra.gif",
+              height: 50,
+              width: 50,
+            ),
+          ),
         ],
       ),
     );
