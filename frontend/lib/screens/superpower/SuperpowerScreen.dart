@@ -54,8 +54,7 @@ class _SuperpowerScreenState extends State<SuperpowerScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 60, 42, 69),
       appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
+        shadowColor: Colors.transparent,
         title: Text(Provider.of<Game>(context).role,
             style: const TextStyle(fontSize: 35, color: Colors.white)),
       ),

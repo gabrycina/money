@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../../providers/user.dart';
 import '/providers/game.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:money/socket_manager.dart';
@@ -87,11 +88,63 @@ class _WinnerScreenState extends State<WinnerScreen>
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 60, 42, 69),
         appBar: AppBar(
-          shape: const RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.vertical(bottom: Radius.circular(100))),
-          title: Text("${Provider.of<Game>(context, listen: false).money}\$",
-              style: const TextStyle(fontSize: 35, color: Colors.white)),
+          shadowColor: Colors.transparent,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("${Provider.of<Game>(context).money}💰",
+                  style: const TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 2.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 5.0,
+                        color: Color.fromARGB(125, 0, 0, 255),
+                      ),
+                    ],
+                  )),
+              Text(Provider.of<User>(context, listen: false).username,
+                  style: const TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 2.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 5.0,
+                        color: Color.fromARGB(125, 0, 0, 255),
+                      ),
+                    ],
+                  )),
+              Text("${Provider.of<Game>(context).medals} 🎖️",
+                  style: const TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 2.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 5.0,
+                        color: Color.fromARGB(125, 0, 0, 255),
+                      ),
+                    ],
+                  ))
+            ],
+          ),
         ),
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

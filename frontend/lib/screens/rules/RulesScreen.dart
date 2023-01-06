@@ -29,9 +29,7 @@ class RulesScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 60, 42, 69),
         appBar: AppBar(
-          shape: const RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.vertical(bottom: Radius.circular(100))),
+          shadowColor: Colors.transparent,
           title: const Text("Rules",
               style: TextStyle(fontSize: 30, color: Colors.white)),
         ),
