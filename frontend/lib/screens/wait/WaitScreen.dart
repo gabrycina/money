@@ -82,8 +82,7 @@ class _WaitScreenState extends State<WaitScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 60, 42, 69),
       appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
+        shadowColor: Colors.transparent,
         title: const Text("Wait",
             style: TextStyle(fontSize: 35, color: Colors.white)),
       ),

@@ -19,8 +19,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 60, 42, 69),
       appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
+        shadowColor: Colors.transparent,
         title: Text("Hi ${Provider.of<User>(context, listen: false).username}",
             style: const TextStyle(fontSize: 30, color: Colors.white)),
       ),

@@ -24,52 +24,16 @@ class ResultScreen extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 25,
                   color: Colors.white,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 2.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 5.0,
-                      color: Color.fromARGB(125, 0, 0, 255),
-                    ),
-                  ],
                 )),
             Text(Provider.of<User>(context, listen: false).username,
                 style: const TextStyle(
                   fontSize: 25,
                   color: Colors.white,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 2.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 5.0,
-                      color: Color.fromARGB(125, 0, 0, 255),
-                    ),
-                  ],
                 )),
             Text("${Provider.of<Game>(context).medals} 🎖️",
                 style: const TextStyle(
                   fontSize: 25,
                   color: Colors.white,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 2.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 5.0,
-                      color: Color.fromARGB(125, 0, 0, 255),
-                    ),
-                  ],
                 ))
           ],
         ),
