@@ -27,7 +27,7 @@ public abstract class Player extends User {
             try {
                 this.buffer = new BufferedReader(new InputStreamReader(player.getInputStream()));
             } catch(IOException e){
-                System.out.println(e);
+                e.printStackTrace();
             }
     }
 

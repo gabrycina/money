@@ -49,11 +49,7 @@ public class Min extends MiniGame {
                 if (json.get("useSuperPower").equals("true"))
                     player.useSuperPower(players,this.lastWinner,this.lastAnswer);
             }
-            for (Player player:this.players) {
-                System.out.println("Prima" + player.getUsername());
-                player.read();
-                System.out.println("dopo" + player.getUsername());
-            };
+            for (Player player:this.players) player.read();
             json = new HashMap<>();
             for (Player player:this.players) {
                 json.put("bankAccount",String.valueOf(player.getProfit()));
