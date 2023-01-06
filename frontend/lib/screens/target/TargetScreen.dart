@@ -50,8 +50,16 @@ class _TargetScreenState extends State<TargetScreen> {
       ),
       body: Column(
         children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 25.0, bottom: 5),
+            child: Text(
+              "Choose your target 🤫",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 30),
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ListView.builder(
                 shrinkWrap: true,
                 itemCount:
