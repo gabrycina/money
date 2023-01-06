@@ -112,7 +112,7 @@ public class Game {
         for(Player player:this.PLAYERS){
             player.save();
             //send player back to main menu
-            Handler clientSock = new Handler(player.getSocket());
+            Handler clientSock = new Handler(player.getSocket(),player);
             new Thread(clientSock).start();
         }
     }

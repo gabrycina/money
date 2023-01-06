@@ -22,8 +22,9 @@ public class Handler implements Runnable {
     private Map<String,String> json;
     private User user;
 
-    public Handler(Socket socket)  {
+    public Handler(Socket socket, User user)  {
         this.CLIENT_SOCKET = socket;
+        this.user = user;
     }
 
     @Override

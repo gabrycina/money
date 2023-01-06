@@ -14,7 +14,7 @@ public class Server {
                 Socket client = server.accept();
                 System.out.println("New client connected " + client.getInetAddress().getHostAddress());
 
-                Handler clientSock = new Handler(client);
+                Handler clientSock = new Handler(client,null);
                 new Thread(clientSock).start();
             }
         } catch (IOException e) {
