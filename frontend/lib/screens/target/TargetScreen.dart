@@ -68,103 +68,71 @@ class _TargetScreenState extends State<TargetScreen> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 5.0, vertical: 5.0),
-                    child: InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.white,
-                                width: 3.0,
-                                style: BorderStyle.solid),
-                            borderRadius: BorderRadius.circular(5.0)),
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 15.0),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Text(
-                                        "🎯",
-                                        style: r,
-                                      )
-                                    ],
+                    child: GestureDetector(
+                      onTap: () => {
+                        answerAndListen(
+                            Provider.of<Game>(context, listen: false)
+                                .players[index])
+                      },
+                      child: InkWell(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.white,
+                                  width: 3.0,
+                                  style: BorderStyle.solid),
+                              borderRadius: BorderRadius.circular(5.0)),
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 10, left: 15.0),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(
+                                          "🎯",
+                                          style: r,
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            Provider.of<Game>(context,
-                                                    listen: false)
-                                                .players[index],
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 20),
-                                            maxLines: 6,
-                                          )),
-                                    ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              Provider.of<Game>(context,
+                                                      listen: false)
+                                                  .players[index],
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 20),
+                                              maxLines: 6,
+                                            )),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Flexible(child: Container()),
-                              ],
-                            ),
-                          ],
+                                  Flexible(child: Container()),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   );
                 }),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                child: SizedBox(
-                  width: 150,
-                  child: TextField(
-                    enabled: !answered,
-                    controller: targetController,
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
-                    onChanged: (_) => setState(() {}),
-                    decoration: InputDecoration(
-                        labelText: 'Option', errorText: validate()),
-                  ),
-                ),
-              ),
-              AnimatedButton(
-                width: 100,
-                height: 50,
-                enabled: !answered,
-                color: Colors.purple,
-                child: const Text(
-                  'SEND',
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                onPressed: () {
-                  final target = targetController.value.text;
-                  if (target.isNotEmpty && validate() == null) {
-                    answerAndListen(target);
-                  }
-                },
-              )
-            ],
-          )
         ],
       ),
     );
