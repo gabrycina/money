@@ -22,7 +22,12 @@ class _WaitScreenState extends State<WaitScreen> {
     waitAll();
   }
 
-  void waitAll() async {}
+  void waitAll() async {
+    // PRIMA FASE :: Si receve un update sul proprio conto
+    dynamic response = await SocketManager.receive();
+    Provider.of<Game>(context, listen: false).money =
+        double.parse(response["bankAccount"]);
+  }
 
   @override
   Widget build(BuildContext context) {

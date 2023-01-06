@@ -13,6 +13,8 @@ class Game with ChangeNotifier {
   double _lastPrize = 0.0;
   bool _sup = true;
   String _supResult = "";
+  int _medals = 0;
+  int _lastMedals = 0;
 
   static const dynamic defaultOption = {
     "Max": "0",
@@ -33,6 +35,16 @@ class Game with ChangeNotifier {
   double get lastPrize => _lastPrize;
   bool get sup => _sup;
   String get supResult => _supResult;
+  int get medals => _medals;
+  int get lastMedals => _lastMedals;
+
+  set medals(int value) {
+    _medals = value;
+  }
+
+  set lastMedals(int value) {
+    _lastMedals = value;
+  }
 
   set supResult(String value) {
     _supResult = value;
