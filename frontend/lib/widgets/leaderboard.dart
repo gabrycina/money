@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LeaderBoard extends StatefulWidget {
-  const LeaderBoard(this.lb, this.title, {super.key});
+  const LeaderBoard(this.lb, this.title,
+      {this.briefcaseWinner = "", super.key});
   final dynamic lb;
   final String title;
+  final String briefcaseWinner;
 
   @override
   State<LeaderBoard> createState() => _LeaderBoardState();
@@ -42,8 +44,9 @@ class _LeaderBoardState extends State<LeaderBoard>
 
   @override
   Widget build(BuildContext context) {
+    widget.lb.sort(((a, b) =>
+        double.parse(b["money"]).compareTo(double.parse(a["money"]))));
     var r = const TextStyle(color: Colors.purpleAccent, fontSize: 34);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -58,7 +61,7 @@ class _LeaderBoardState extends State<LeaderBoard>
                 fontSize: 35,
                 foreground: Paint()
                   ..style = PaintingStyle.stroke
-                  ..strokeWidth = 6
+                  ..strokeWidth = 4.5
                   ..color = Colors.amber.shade900,
               ),
             ),
@@ -163,7 +166,22 @@ class _LeaderBoardState extends State<LeaderBoard>
                                     ],
                                   ),
                                 ),
-                                Flexible(child: Container()),
+                                Flexible(
+                                  child: widget.briefcaseWinner ==
+                                          widget.lb[index]["username"]
+                                      ? const Padding(
+                                          padding: EdgeInsets.only(
+                                              right: 8.0, left: 20),
+                                          child: Text(
+                                            "💼 +300",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                            textAlign: TextAlign.right,
+                                          ),
+                                        )
+                                      : Container(),
+                                )
                               ],
                             ),
                           ],

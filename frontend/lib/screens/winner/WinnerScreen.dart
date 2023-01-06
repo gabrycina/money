@@ -105,7 +105,7 @@ class _WinnerScreenState extends State<WinnerScreen>
             Stack(children: <Widget>[
               // Stroked text as border.
               Text(
-                "You won $prize\$",
+                prize == -50.0 ? "You've lost $prize\$" : "You won $prize\$",
                 style: TextStyle(
                   fontSize: 50,
                   foreground: Paint()

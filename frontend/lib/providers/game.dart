@@ -127,4 +127,24 @@ class Game with ChangeNotifier {
     _timestamp = value;
     //notifyListeners();
   }
+
+  void setDefaults() {
+    _code = "";
+    _players = [];
+    _role = "";
+    _miniGame = "";
+    _miniGameRules = "";
+    _timestamp = 0;
+    _round = 1;
+    _money = 0.0;
+    _boosted = false;
+    _lastPrize = 0.0;
+    _sup = true;
+    _supResult = "";
+    _medals = 0;
+    _lastMedals = 0;
+    _miniGameCount = 1;
+    briefcaseWinner = "";
+    leaderboard = [];
+  }
 }
