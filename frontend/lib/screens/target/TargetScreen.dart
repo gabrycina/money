@@ -38,6 +38,8 @@ class _TargetScreenState extends State<TargetScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var r = const TextStyle(color: Colors.purpleAccent, fontSize: 34);
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 60, 42, 69),
       appBar: AppBar(
@@ -48,14 +50,79 @@ class _TargetScreenState extends State<TargetScreen> {
       ),
       body: Column(
         children: [
-          Text(Provider.of<Game>(context, listen: false).players.toString(),
-              style: const TextStyle(fontSize: 15, color: Colors.white)),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount:
+                    Provider.of<Game>(context, listen: false).players.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 5.0),
+                    child: InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.white,
+                                width: 3.0,
+                                style: BorderStyle.solid),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 10, left: 15.0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text(
+                                        "🎯",
+                                        style: r,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            Provider.of<Game>(context,
+                                                    listen: false)
+                                                .players[index],
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 20),
+                                            maxLines: 6,
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(child: Container()),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: SizedBox(
                   width: 150,
                   child: TextField(
