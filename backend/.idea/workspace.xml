@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9bad13-8e9b-4e53-b58c-fe65f388fbbf" name="Changes" comment="" />
+    <list default="true" id="cd9bad13-8e9b-4e53-b58c-fe65f388fbbf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/lib/main.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +46,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ClientTest.testCreatePartyRequest">
     <configuration name="ClientTest.testCreatePartyRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <option name="PACKAGE_NAME" value="" />

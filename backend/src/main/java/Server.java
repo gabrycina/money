@@ -8,7 +8,7 @@ public class Server {
         Mongodb.init("mongodb+srv://money:py8EaXXi2ZD4cqxH@cluster0.iutok3h.mongodb.net/?retryWrites=true&w=majority");
         ServerSocket server = null;
         try {
-            server = new ServerSocket(8080);
+            server = new ServerSocket(1234);
             server.setReuseAddress(true);
             while (true) {
                 Socket client = server.accept();

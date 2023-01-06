@@ -14,7 +14,6 @@ import 'package:money/screens/winner/WinnerScreen.dart';
 import 'package:money/screens/welcome/WelcomeScreen.dart';
 import 'package:money/screens/wait/WaitScreen.dart';
 import 'package:money/screens/result/ResultScreen.dart';
-import 'package:money/socket_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'providers/user.dart';
@@ -22,7 +21,7 @@ import 'providers/leaderboard.dart';
 
 void main() async {
   setPathUrlStrategy();
-  SocketManager.start("127.0.0.1", 8080);
+
   return runApp(
     MultiProvider(
       providers: [
