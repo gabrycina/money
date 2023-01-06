@@ -41,7 +41,13 @@ class _WaitScreenState extends State<WaitScreen> {
       // questo e' il max profit del minigame, per ora non lo usiamo
 
       response = await SocketManager.receive();
-      // TODO estrapolare leaderboard e briefcase winner
+      for (String player in state.players) {
+        state.leaderboard.add({"username": player, "money": response[player]});
+      }
+      state.leaderboard.sort(((a, b) =>
+          double.parse(b["money"]).compareTo(double.parse(a["money"]))));
+      state.briefcaseWinner = response["briefcase"];
+      context.go("/end");
     } else if (state.round == 2) {
       // **********************************
       // SIAMO ALLA FINE DEL PRIMO MINIGAME

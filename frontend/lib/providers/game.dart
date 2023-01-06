@@ -18,6 +18,8 @@ class Game with ChangeNotifier {
   int _medals = 0;
   int _lastMedals = 0;
   int _miniGameCount = 1;
+  String briefcaseWinner = "";
+  List<dynamic> leaderboard = [];
 
   static const dynamic defaultOption = {
     "Max": "0",
