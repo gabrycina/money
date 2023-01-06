@@ -26,7 +26,7 @@ class GameScreenState extends State<GameScreen> {
     super.initState();
     myDuration = Duration(
             milliseconds: Provider.of<Game>(context, listen: false).timestamp) +
-        const Duration(minutes: 3) -
+        const Duration(minutes: 7) -
         Duration(milliseconds: DateTime.now().millisecondsSinceEpoch);
 
     debugPrint(myDuration.toString());
