@@ -24,6 +24,18 @@ public class Json {
         return new Gson().fromJson(json, new TypeToken<Map<String,String>>() {}.getType()); //create Map<String,String>
     }
 
+    public static Map<String,String> readJson(@NotNull BufferedReader buffer) {
+        String json = null;
+        try {
+            json = buffer.readLine();
+            System.out.println("server receive --> "+json);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new Gson().fromJson(json, new TypeToken<Map<String,String>>() {}.getType()); //create Map<String,String>
+    }
+
     public static void writeJson(Socket client,Map<String,String> json) {
         try {
             new PrintWriter(client.getOutputStream(), true)
