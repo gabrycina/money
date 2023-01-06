@@ -18,7 +18,11 @@ class _WaitScreenState extends State<WaitScreen> {
   @override
   void initState() {
     super.initState();
+    SocketManager.send({"wait": "true"});
+    waitAll();
   }
+
+  void waitAll() async {}
 
   @override
   Widget build(BuildContext context) {
