@@ -44,8 +44,10 @@ public class Split extends MiniGame {
             }
             for (Player player:this.players) player.read();
             json = new HashMap<>();
-            json.put("nextStep","true");
-            this.reportToAll(json);
+            for (Player player:this.players) {
+                json.put("bankAccount",String.valueOf(player.getProfit()));
+                player.write(json);
+            }
         }
     }
 
