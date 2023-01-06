@@ -24,7 +24,7 @@ public class Split extends MiniGame {
         for(int i=1; i<3; i++) {
             this.round = i;
             tmp = this.players.stream().mapToDouble(Player::getProfit).sum();
-            this.profit += (tmp+tmp*0.25*this.round)/this.players.size();
+            this.profit += Math.round(((tmp+tmp*0.25*this.round)/this.players.size())*100)/100.0;
             //send timestamp
             json = new HashMap<>();
             json.put("timeStamp", new Timestamp(new Date().getTime()).toString());

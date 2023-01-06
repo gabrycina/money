@@ -49,7 +49,7 @@ public abstract class Player extends User {
     }
 
     public double getProfit(){
-        return this.profit;
+        return Math.round(this.profit*100)/100.0;
     }
 
     public int getToken(){
