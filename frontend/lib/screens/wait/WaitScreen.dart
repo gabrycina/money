@@ -4,6 +4,7 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:money/socket_manager.dart';
 import 'package:provider/provider.dart';
+import '../../providers/user.dart';
 import '/providers/game.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,7 +19,10 @@ class _WaitScreenState extends State<WaitScreen> {
   @override
   void initState() {
     super.initState();
-    SocketManager.send({"wait": "true"});
+    SocketManager.send({
+      "wait": "true",
+      "name": Provider.of<User>(context, listen: false).username
+    });
     waitAll();
   }
 
