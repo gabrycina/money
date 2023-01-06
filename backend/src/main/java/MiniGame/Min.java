@@ -96,8 +96,8 @@ public class Min extends MiniGame {
     @Override
     public String getRules(){
         return """
-                Each player choose a number between [1, 4]
-                The player that put the minimum (unique) number get the price multiplied by the number"
+                Each player choose a number between [1, 4]. The player that put the minimum (unique) number get the price multiplied by the number
+                
                 Round 1: 50$
                 Round 2: 100$ + 1M
                """;

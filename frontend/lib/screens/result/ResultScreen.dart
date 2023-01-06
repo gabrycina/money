@@ -21,10 +21,17 @@ class ResultScreen extends StatelessWidget {
             style: const TextStyle(fontSize: 35, color: Colors.white)),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Text(Provider.of<Game>(context).supResult,
-                style: const TextStyle(fontSize: 35, color: Colors.white)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                Provider.of<Game>(context).supResult,
+                style: const TextStyle(fontSize: 25, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),

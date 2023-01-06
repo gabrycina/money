@@ -28,7 +28,7 @@ public class Robber extends Player {
         this.addProfit(loot);
 
         Map<String,String> json = new HashMap<>();
-        json.put("result",Double.valueOf(loot).toString());
+        json.put("result", "You stole " + Double.valueOf(loot).toString() + "$ from " + target.getUsername());
         this.write(json);
     }
 }

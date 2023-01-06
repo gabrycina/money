@@ -1,3 +1,4 @@
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
@@ -40,18 +41,20 @@ class RulesScreen extends StatelessWidget {
               padding: const EdgeInsets.all(30),
               child: Center(
                 child: Text(
-                  miniGameRules,
+                  miniGameRules.substring(1),
                   style: const TextStyle(color: Colors.white, fontSize: 25),
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.left,
                 ),
               ),
             ),
-            InkWell(
-                child: const Text(
-                  'Watch tutorial',
-                  style: TextStyle(color: Colors.amberAccent, fontSize: 25),
-                ),
-                onTap: () => launchUrl(getTutorialLink())),
+            AnimatedButton(
+              onPressed: () => launchUrl(getTutorialLink()),
+              color: Colors.amber.shade600,
+              child: const Text(
+                'TUTORIAL 🕹️',
+                style: TextStyle(color: Colors.white, fontSize: 30),
+              ),
+            ),
           ],
         ));
     //);

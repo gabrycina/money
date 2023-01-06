@@ -26,7 +26,7 @@ public class Ludopatic extends Player {
         this.addProfit(target.getProfit()*0.1);
 
         Map<String,String> json = new HashMap<>();
-        json.put("result",Double.valueOf(target.getProfit()*0.1).toString());
+        json.put("result", "You won " + Double.valueOf(target.getProfit()*0.1).toString() + "$ from your bet on " + target.getUsername());
         this.write(json);
     }
 }

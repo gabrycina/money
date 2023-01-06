@@ -43,6 +43,17 @@ class Game with ChangeNotifier {
   int get medals => _medals;
   int get lastMedals => _lastMedals;
   int get miniGameCount => _miniGameCount;
+  String get beautifiedMiniGame {
+    if (_miniGame == "Min") {
+      return "Lowest Unique Bid";
+    } else if (_miniGame == "Max") {
+      return "Prize Draw";
+    } else if (_miniGame == "ChoosePrize") {
+      return "Pick a Prize";
+    } else {
+      return "The Magic Money Machine";
+    }
+  }
 
   set miniGameCount(int value) {
     _miniGameCount = value;

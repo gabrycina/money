@@ -82,8 +82,8 @@ public class Split extends MiniGame {
     @Override
     public String getRules(){
         return """
-                Each player choose an amount from their bank account and put it in a box
-                At the end of the round, every player get the (total money in the box plus a X%) divided equally by the number of players
+                Each player choose an amount from their bank account and put it in a box. At the end of the round, every player get the (total money in the box plus a X%) divided equally by the number of players
+                
                 Round 1: 25%
                 Round 2: 50%
                """;

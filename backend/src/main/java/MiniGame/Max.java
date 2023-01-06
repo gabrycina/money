@@ -96,8 +96,8 @@ public class Max extends MiniGame {
     @Override
     public String getRules(){
         return """
-                Each player choose a number between [0, 20]
-                The player that put the maximum **unique** number wins the price divided by the sum of all the numbers. (if there is no unique number there is no winner)
+                Each player choose a number between [0, 20]. The player that put the maximum **unique** number wins the price divided by the sum of all the numbers. (if there is no unique number there is no winner)
+                
                 Round 1: 100$
                 Round 2: 500$ + 1M
                """;

@@ -19,8 +19,8 @@ public class Detective extends Player {
     @Override
     public void useSuperPower(List<Player> players, Player lastWinner, Map<String,String> lastAnswer){
         Map<String,String> json = new HashMap<>();
-        if (lastWinner==null) json.put("result","nobody");
-        else json.put("result",lastWinner.getUsername());
+        if (lastWinner==null) json.put("result","Nobody");
+        else json.put("result", "Last winner was " + lastWinner.getUsername());
         this.write(json);
     }
 }

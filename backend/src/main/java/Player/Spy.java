@@ -24,7 +24,7 @@ public class Spy extends Player {
                 .findFirst().orElse(this);
 
         Map<String,String> bankAccount = new HashMap<>();
-        bankAccount.put("result",Double.valueOf(target.getProfit()).toString());
+        bankAccount.put("result", target.getUsername() + " has got " + Double.valueOf(target.getProfit()).toString() + "$");
         this.write(bankAccount);
     }
 }

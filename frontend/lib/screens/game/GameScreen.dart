@@ -159,9 +159,15 @@ class GameScreenState extends State<GameScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      Provider.of<Game>(context, listen: false).miniGame,
-                      style: const TextStyle(color: Colors.white, fontSize: 25),
+                    Expanded(
+                      child: Text(
+                        Provider.of<Game>(context, listen: false)
+                            .beautifiedMiniGame,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20),
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                      ),
                     ),
                     Row(
                       children: [
@@ -181,11 +187,11 @@ class GameScreenState extends State<GameScreen> {
                 ),
               ),
               AnimatedButton(
-                color: const Color.fromARGB(255, 60, 60, 69),
+                color: Colors.amber.shade600,
                 width: queryData.size.width / 6,
                 height: queryData.size.width / 6,
                 child: const Text(
-                  "📄",
+                  "🕹️",
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.white,

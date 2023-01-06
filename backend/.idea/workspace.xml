@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9bad13-8e9b-4e53-b58c-fe65f388fbbf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../frontend/lib/screens/wait/WaitScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/lib/screens/wait/WaitScreen.dart" afterDir="false" />
-    </list>
+    <list default="true" id="cd9bad13-8e9b-4e53-b58c-fe65f388fbbf" name="Changes" comment="Fixed WaitScreen synchronization problem with an overload on readJson and a global buffer in Player class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,6 +114,14 @@
       <option name="presentableId" value="Default" />
       <updated>1669475317875</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fixed WaitScreen synchronization problem with an overload on readJson and a global buffer in Player class">
+      <created>1673016006874</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1673016006874</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -128,6 +134,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed WaitScreen synchronization problem with an overload on readJson and a global buffer in Player class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed WaitScreen synchronization problem with an overload on readJson and a global buffer in Player class" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/backend$Client.ic" NAME="Client Coverage Results" MODIFIED="1669656069071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

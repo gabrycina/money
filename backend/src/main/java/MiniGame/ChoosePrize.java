@@ -104,9 +104,8 @@ public class ChoosePrize extends MiniGame {
     @Override
     public String getRules(){
         return """
-                Each player choose a price [X, Y, Z, W]
-                If everyone choose a different price the next round is boosted
-                If two players (or n players) choose the same price they got nothing
+                Each player choose a price [X, Y, Z, W]. If everyone choose a different price the next round is boosted. If two players (or n players) choose the same price they got nothing
+                
                 Round 1: [0, 50, 100, M]
                 Round 2: [-50, 100, 500, M]
                 Round 2 (boosted): [100, 250, 500, 2M]
