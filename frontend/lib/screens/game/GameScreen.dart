@@ -4,6 +4,7 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:money/socket_manager.dart';
 import 'package:provider/provider.dart';
+import '../../providers/user.dart';
 import '/providers/game.dart';
 import 'package:go_router/go_router.dart';
 
@@ -149,63 +150,98 @@ class GameScreenState extends State<GameScreen> {
       backgroundColor: const Color.fromARGB(255, 60, 42, 69),
       appBar: AppBar(
         shadowColor: Colors.transparent,
-        title: Text("${Provider.of<Game>(context).money}\$",
-            style: const TextStyle(fontSize: 35, color: Colors.white)),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("${Provider.of<Game>(context).money}💰",
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  shadows: <Shadow>[
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 2.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 5.0,
+                      color: Color.fromARGB(125, 0, 0, 255),
+                    ),
+                  ],
+                )),
+            Text(Provider.of<User>(context, listen: false).username,
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  shadows: <Shadow>[
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 2.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 5.0,
+                      color: Color.fromARGB(125, 0, 0, 255),
+                    ),
+                  ],
+                )),
+            Text("${Provider.of<Game>(context).medals} 🎖️",
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  shadows: <Shadow>[
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 2.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 5.0,
+                      color: Color.fromARGB(125, 0, 0, 255),
+                    ),
+                  ],
+                ))
+          ],
+        ),
       ),
       body:
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 margin: const EdgeInsets.only(right: 15),
                 width: queryData.size.width - 2 * queryData.size.width / 6,
                 height: queryData.size.width / 6,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
-                      child: Text(
-                        Provider.of<Game>(context, listen: false)
-                            .beautifiedMiniGame,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 20),
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                      ),
+                    Image.asset(
+                      "assets/clessidra.gif",
+                      height: 25,
+                      width: 25,
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          "assets/clessidra.gif",
-                          height: 25,
-                          width: 25,
-                        ),
-                        Text(
-                          timeLeft(),
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 25),
-                        ),
-                      ],
+                    Text(
+                      timeLeft(),
+                      style: const TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ],
                 ),
               ),
               AnimatedButton(
-                color: Colors.amber.shade600,
-                width: queryData.size.width / 6,
-                height: queryData.size.width / 6,
-                child: const Text(
-                  "🕹️",
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
+                color: Colors.blueGrey,
+                width: queryData.size.width / 7,
+                height: queryData.size.width / 7,
+                child: const Icon(
+                  Icons.info_outlined,
+                  color: Colors.white,
+                  size: 30.0,
+                  semanticLabel: 'Text to announce in accessibility modes',
                 ),
                 onPressed: () {
                   context.push("/rules");
@@ -217,13 +253,26 @@ class GameScreenState extends State<GameScreen> {
         Center(
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 70.0),
+                child: Stack(children: [
+                  Text(
+                    Provider.of<Game>(context, listen: false)
+                        .beautifiedMiniGame,
+                    style: const TextStyle(
+                        color: Colors.amberAccent, fontSize: 40),
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                  ),
+                ]),
+              ),
               Image.asset(
                 "assets/${Provider.of<Game>(context, listen: false).role}.png",
-                height: 150,
-                width: 150,
+                height: 120,
+                width: 120,
               ),
               Text("You're a ${Provider.of<Game>(context, listen: false).role}",
-                  style: const TextStyle(fontSize: 40, color: Colors.white38)),
+                  style: const TextStyle(fontSize: 35, color: Colors.white38)),
             ],
           ),
         ),
