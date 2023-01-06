@@ -23,10 +23,11 @@ public class Ludopatic extends Player {
                 .filter(p->p.getUsername().equals(username))
                 .findFirst().orElse(this);
 
-        this.addProfit(target.getProfit()*0.1);
+        double profit = Math.round(target.getProfit()*0.1*100)/100.0;
+        this.addProfit(profit);
 
         Map<String,String> json = new HashMap<>();
-        json.put("result", "You won " + Double.valueOf(target.getProfit()*0.1).toString() + "$ from your bet on " + target.getUsername());
+        json.put("result", "You won " + Double.valueOf(profit).toString() + "$ from your bet on " + target.getUsername());
         this.write(json);
     }
 }

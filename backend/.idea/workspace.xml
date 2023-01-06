@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9bad13-8e9b-4e53-b58c-fe65f388fbbf" name="Changes" comment="Fixed WaitScreen synchronization problem with an overload on readJson and a global buffer in Player class" />
+    <list default="true" id="cd9bad13-8e9b-4e53-b58c-fe65f388fbbf" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -23,7 +23,7 @@ public class Robber extends Player {
                 .filter(p->p.getUsername().equals(username))
                 .findFirst().orElse(this);
 
-        double loot = target.getProfit()*0.05;
+        double loot = Math.round(target.getProfit()*0.05*100)/100.0;
         target.addProfit(-loot);
         this.addProfit(loot);
 

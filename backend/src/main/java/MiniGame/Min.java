@@ -63,12 +63,10 @@ public class Min extends MiniGame {
         Map<String,String> json;
         Map<Integer,List<Player>> options = new HashMap<>();
         int option;
-        int minOption = Integer.MAX_VALUE;
 
         for (Player player:this.players){
             json = player.read();
             option = Integer.parseInt(json.get("option"));
-            minOption = Math.min(minOption,option);
 
             List<Player> list = options.get(option);
             if (list == null)
@@ -81,12 +79,12 @@ public class Min extends MiniGame {
 
         int res = options.entrySet().stream()
                 .filter(e->e.getValue().size()==1)
-                .map(Map.Entry::getKey).min(Comparator.naturalOrder()).orElse(-1);
+                .map(Map.Entry::getKey).min(Comparator.naturalOrder()).orElse(0);
 
-        if (res != -1) this.lastWinner = options.get(res).get(0);
+        if (res != 0) this.lastWinner = options.get(res).get(0);
         else this.lastWinner = null;
 
-        this.lastPrize = 50*this.round*minOption;
+        this.lastPrize = 50*this.round*res;
     }
 
     @Override
