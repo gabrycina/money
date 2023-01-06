@@ -20,6 +20,7 @@ class _WinnerScreenState extends State<WinnerScreen>
   late AnimationController _animationController;
   late Animation _animation;
   double prize = 0.0;
+  int medals = 0;
   String nextStep = "false";
 
   @override
@@ -41,8 +42,6 @@ class _WinnerScreenState extends State<WinnerScreen>
           _animationController.forward();
         }
       });
-
-    super.initState();
   }
 
   @override
@@ -53,9 +52,12 @@ class _WinnerScreenState extends State<WinnerScreen>
 
   void listenAndSuperpower() async {
     dynamic response = await SocketManager.receive();
-    // if minigame == ChosePrize we receive boost
-    //TODO add boost to Game
+
+    debugPrint("Medaglie Vinte $medals");
+
     if (Provider.of<Game>(context, listen: false).miniGame == "ChoosePrize") {
+      Provider.of<Game>(context, listen: false).boosted =
+          response["boost"] == "true";
       response = await SocketManager.receive();
     }
 
@@ -77,14 +79,18 @@ class _WinnerScreenState extends State<WinnerScreen>
         Provider.of<Game>(context, listen: false).lastPrize;
     prize += Provider.of<Game>(context, listen: false).lastPrize;
     Provider.of<Game>(context, listen: false).lastPrize = 0.0;
-    // queste creano un eccezione andrebbero spostate in Game/Split
+
+    Provider.of<Game>(context, listen: false).medals +=
+        Provider.of<Game>(context, listen: false).lastMedals;
+    medals += Provider.of<Game>(context, listen: false).lastMedals;
+    Provider.of<Game>(context, listen: false).lastMedals = 0;
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 60, 42, 69),
         appBar: AppBar(
           shape: const RoundedRectangleBorder(
               borderRadius:
                   BorderRadius.vertical(bottom: Radius.circular(100))),
-          title: Text("${Provider.of<Game>(context).money}\$",
+          title: Text("${Provider.of<Game>(context, listen: false).money}\$",
               style: const TextStyle(fontSize: 35, color: Colors.white)),
         ),
         body: Center(

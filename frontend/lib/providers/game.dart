@@ -43,6 +43,7 @@ class Game with ChangeNotifier {
   int get medals => _medals;
   int get lastMedals => _lastMedals;
   int get miniGameCount => _miniGameCount;
+
   String get beautifiedMiniGame {
     if (_miniGame == "Min") {
       return "Lowest Unique Bid";

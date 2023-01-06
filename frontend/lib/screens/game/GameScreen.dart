@@ -118,11 +118,21 @@ class GameScreenState extends State<GameScreen> {
     });
     dynamic response = await SocketManager.receive();
     stopTimer();
-    // TODO response["prize"] could be a Medal
-    Provider.of<Game>(context, listen: false).lastPrize =
-        double.parse(response["prize"]);
+
+    if (response["prize"] == "M") {
+      Provider.of<Game>(context, listen: false).lastMedals = 1;
+    } else if (response["prize"] == "2M") {
+      Provider.of<Game>(context, listen: false).lastMedals = 2;
+    } else {
+      Provider.of<Game>(context, listen: false).lastPrize =
+          double.parse(response["prize"]);
+    }
 
     if (response["winner"] == "true") {
+      if (Provider.of<Game>(context, listen: false).round == 2) {
+        Provider.of<Game>(context, listen: false).lastMedals = 1;
+      }
+
       context.go("/split");
     } else {
       context.go("/winner");
