@@ -14,7 +14,11 @@ class WinnerScreen extends StatefulWidget {
   State<WinnerScreen> createState() => _WinnerScreenState();
 }
 
-class _WinnerScreenState extends State<WinnerScreen> {
+class _WinnerScreenState extends State<WinnerScreen>
+    with SingleTickerProviderStateMixin {
+  bool answered = false;
+  late AnimationController _animationController;
+  late Animation _animation;
   double prize = 0.0;
   String nextStep = "false";
 
@@ -22,6 +26,29 @@ class _WinnerScreenState extends State<WinnerScreen> {
   void initState() {
     super.initState();
     SocketManager.send({"username": "", "prize": ""});
+
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 2000));
+    _animationController.repeat(reverse: true);
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController)
+      ..addListener(() {
+        setState(() {});
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _animationController.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          _animationController.forward();
+        }
+      });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   void listenAndSuperpower() async {
@@ -52,41 +79,85 @@ class _WinnerScreenState extends State<WinnerScreen> {
     Provider.of<Game>(context, listen: false).lastPrize = 0.0;
     // queste creano un eccezione andrebbero spostate in Game/Split
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 60, 42, 69),
-      appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
-        title: Text("${Provider.of<Game>(context).money}\$",
-            style: const TextStyle(fontSize: 35, color: Colors.white)),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text("That's your prize $prize\$ ",
-                style: const TextStyle(fontSize: 40, color: Colors.white)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: AnimatedButton(
-              color: Colors.purple,
-              width: 70,
-              height: 50,
-              child: const Text(
-                "NEXT",
+        backgroundColor: const Color.fromARGB(255, 60, 42, 69),
+        appBar: AppBar(
+          shape: const RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.vertical(bottom: Radius.circular(100))),
+          title: Text("${Provider.of<Game>(context).money}\$",
+              style: const TextStyle(fontSize: 35, color: Colors.white)),
+        ),
+        body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            prize == 0.0
+                ? Image.asset(
+                    "assets/empty_wallet.gif",
+                    height: 100,
+                    width: 200,
+                  )
+                : Container(),
+            Stack(children: <Widget>[
+              // Stroked text as border.
+              Text(
+                "You won $prize\$",
                 style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 50,
+                  foreground: Paint()
+                    ..style = PaintingStyle.stroke
+                    ..strokeWidth = 6
+                    ..color = prize != 0.0
+                        ? Colors.amber.shade900
+                        : Colors.grey.shade600,
                 ),
               ),
-              onPressed: () {
-                listenAndSuperpower();
-              },
+              ShaderMask(
+                shaderCallback: (rect) {
+                  return LinearGradient(stops: [
+                    _animation.value - 0.5,
+                    _animation.value,
+                    _animation.value + 0.5
+                  ], colors: [
+                    Color(int.parse("0xFFFFD740")),
+                    Color(int.parse("0xFFFFE57f")),
+                    Color(int.parse("0xFFFFB300"))
+                  ]).createShader(rect);
+                },
+                child: Text(
+                  "You won $prize\$",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 50),
+                ),
+              ),
+            ]),
+            prize != 0.0
+                ? Image.asset(
+                    "assets/coins.gif",
+                    height: 100,
+                    width: 200,
+                  )
+                : Container(),
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: AnimatedButton(
+                color: Colors.purple,
+                width: 70,
+                height: 50,
+                child: const Text(
+                  "NEXT",
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                onPressed: () {
+                  listenAndSuperpower();
+                },
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ]),
+        ));
   }
 }

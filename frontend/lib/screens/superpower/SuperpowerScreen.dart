@@ -62,10 +62,28 @@ class _SuperpowerScreenState extends State<SuperpowerScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Center(
-            child: Text("Do you want to use your Superpower?",
-                style: TextStyle(fontSize: 40, color: Colors.white)),
+          Image.asset(
+            "assets/${Provider.of<Game>(context, listen: false).role}.png",
+            height: 150,
+            width: 150,
           ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(
+              child: Text(
+                "Do you want to use your Superpower?",
+                style: TextStyle(fontSize: 30, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          answered
+              ? Image.asset(
+                  "assets/clessidra.gif",
+                  height: 30,
+                  width: 30,
+                )
+              : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -111,13 +129,6 @@ class _SuperpowerScreenState extends State<SuperpowerScreen> {
               ),
             ],
           ),
-          answered
-              ? Image.asset(
-                  "assets/clessidra.gif",
-                  height: 50,
-                  width: 50,
-                )
-              : Container(),
         ],
       ),
     );

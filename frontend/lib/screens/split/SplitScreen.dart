@@ -14,12 +14,38 @@ class SplitScreen extends StatefulWidget {
   State<SplitScreen> createState() => _SplitScreenState();
 }
 
-class _SplitScreenState extends State<SplitScreen> {
+class _SplitScreenState extends State<SplitScreen>
+    with SingleTickerProviderStateMixin {
   bool answered = false;
+  late AnimationController _animationController;
+  late Animation _animation;
 
   @override
   void initState() {
     super.initState();
+
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 2000));
+    _animationController.repeat(reverse: true);
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController)
+      ..addListener(() {
+        setState(() {});
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _animationController.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          _animationController.forward();
+        }
+      });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   void answerAndListen(bool split) async {
@@ -41,13 +67,58 @@ class _SplitScreenState extends State<SplitScreen> {
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(100))),
-        title: const Text("You are the winner",
-            style: TextStyle(fontSize: 35, color: Colors.white)),
+        title: const Text("You're the Winner!",
+            style: TextStyle(fontSize: 30, color: Colors.white)),
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text(
-            "Do you want to split?\n--- prize ${Provider.of<Game>(context, listen: false).lastPrize}\$ ---",
-            style: const TextStyle(fontSize: 35, color: Colors.white)),
+        Stack(children: <Widget>[
+          // Stroked text as border.
+          Text(
+            "${Provider.of<Game>(context, listen: false).lastPrize}\$",
+            style: TextStyle(
+              fontSize: 80,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.amber.shade900,
+            ),
+          ),
+          ShaderMask(
+            shaderCallback: (rect) {
+              return LinearGradient(stops: [
+                _animation.value - 0.5,
+                _animation.value,
+                _animation.value + 0.5
+              ], colors: [
+                Color(int.parse("0xFFFFD740")),
+                Color(int.parse("0xFFFFE57f")),
+                Color(int.parse("0xFFFFB300"))
+              ]).createShader(rect);
+            },
+            child: Text(
+              "${Provider.of<Game>(context, listen: false).lastPrize}\$",
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 80),
+            ),
+          ),
+        ]),
+        Image.asset(
+          "assets/coins.gif",
+          height: 100,
+          width: 200,
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 20, right: 20.0, left: 20.0),
+          child: Center(
+            child: Text(
+              "Do you want to split?",
+              style: TextStyle(fontSize: 30, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
