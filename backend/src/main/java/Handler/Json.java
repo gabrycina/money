@@ -15,9 +15,12 @@ public class Json {
     public static Map<String,String> readJson(@NotNull Socket client) {
         String json = null;
         try {
-            json = new BufferedReader(new InputStreamReader(client.getInputStream()))
-                    .readLine();
-            System.out.println("server receive --> "+json);
+            do {
+                json = new BufferedReader(new InputStreamReader(client.getInputStream()))
+                        .readLine();
+                System.out.println("server receive --> " + json);
+            }while(json.equals("keep-alive"));
+            System.out.println("end wait");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,9 +30,11 @@ public class Json {
     public static Map<String,String> readJson(@NotNull BufferedReader buffer) {
         String json = null;
         try {
-            json = buffer.readLine();
-            System.out.println("server receive --> "+json);
-
+            do {
+                json = buffer.readLine();
+                System.out.println("server receive --> "+json);
+            }while(json.equals("keep-alive"));
+            System.out.println("end wait");
         } catch (IOException e) {
             e.printStackTrace();
         }

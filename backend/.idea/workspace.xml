@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd9bad13-8e9b-4e53-b58c-fe65f388fbbf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../frontend/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/lib/main.dart" afterDir="false" />
+    <list default="true" id="cd9bad13-8e9b-4e53-b58c-fe65f388fbbf" name="Changes" comment="Fixed WaitScreen synchronization problem with an overload on readJson and a global buffer in Player class">
+      <change beforePath="$PROJECT_DIR$/../frontend/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.flutter-plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
