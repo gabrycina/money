@@ -33,7 +33,7 @@ public abstract class Player extends User {
 
     public void save(){ //update bank account
         Mongodb.USERS.updateOne(Filters.eq("username", super.getUsername()),
-                Updates.set("money", String.valueOf(super.getMoney()+this.getProfit())));
+                Updates.set("money", String.valueOf(Math.round((super.getMoney()+this.getProfit())*100)/100.0)));
     }
 
     public Map<String,String> read(){
