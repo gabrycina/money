@@ -17,19 +17,16 @@ class TargetScreen extends StatefulWidget {
 class _TargetScreenState extends State<TargetScreen> {
   final targetController = TextEditingController();
   bool answered = false;
+  int selected = -1;
 
-  String? validate() {
+  /*String? validate() {
     String text = targetController.value.text;
     final playerList = Provider.of<Game>(context, listen: false).players;
     if (playerList.contains(text)) return null;
     return "Target is not valid";
-  }
+  }*/
 
   void answerAndListen(String target) async {
-    setState(() {
-      answered = true;
-    });
-
     SocketManager.send({"username": target});
     dynamic response = await SocketManager.receive();
     Provider.of<Game>(context, listen: false).supResult = response["result"];
@@ -69,16 +66,27 @@ class _TargetScreenState extends State<TargetScreen> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 5.0, vertical: 5.0),
                     child: GestureDetector(
-                      onTap: () => {
+                      onTap: () {
+                        if (answered) return;
+
+                        setState(() {
+                          selected = index;
+                          answered = true;
+                        });
+
                         answerAndListen(
                             Provider.of<Game>(context, listen: false)
-                                .players[index])
+                                .players[index]);
                       },
                       child: InkWell(
                         child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Colors.white,
+                                  color: answered
+                                      ? (index == selected
+                                          ? Colors.amberAccent
+                                          : Colors.white54)
+                                      : Colors.white,
                                   width: 3.0,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(5.0)),
@@ -133,6 +141,16 @@ class _TargetScreenState extends State<TargetScreen> {
                   );
                 }),
           ),
+          answered
+              ? Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Image.asset(
+                    "assets/clessidra.gif",
+                    width: 50,
+                    height: 50,
+                  ),
+                )
+              : Container(),
         ],
       ),
     );
