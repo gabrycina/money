@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
@@ -8,11 +9,15 @@ import 'package:flutter/services.dart';
 class SocketManager {
   static Socket? socket;
   static Queue<dynamic> buffer = Queue();
+  static Timer? timer;
 
   static void start(String ipaddr, int port) async {
     SocketManager.socket = await Socket.connect(ipaddr, port);
     await Future.delayed(const Duration(seconds: 1)); // altrimenti non logga
     debugPrint("Connected with :: ${SocketManager.socket?.remoteAddress}");
+
+    SocketManager.timer = Timer.periodic(const Duration(seconds: 45),
+        (_) => SocketManager.socket?.write("keep-alive\n"));
 
     SocketManager.socket?.listen(
       (Uint8List data) {
@@ -29,6 +34,7 @@ class SocketManager {
       // errore nella ricezione di dati
       onError: (error) {
         debugPrint("Error on socket :: $error");
+        SocketManager.timer?.cancel();
         SocketManager.socket?.destroy();
       },
     );
