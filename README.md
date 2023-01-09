@@ -61,6 +61,10 @@ If you're experiencing errors that include the xcodebuild command please execute
 sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 ```
 
+#### Inserting the correct address and port
+
+If you're running Money 💸 locally, just insert 127.0.0.1 as the address and 1234 as the port
+
 #### Hosting Money 💸 on your Mac...
 If you want to play online with other players you need also [ngrok](https://ngrok.com/download) and execute the command
 
@@ -69,6 +73,29 @@ $ ~ ngrok tcp 1234
 ```
 
 which forwards every connection from an external device to your computer, to the backend server on the 1234 port.
+Later, insert the "Forwarding" tcp address and port into the respective fields.
+
+#### Test Users
+
+We provided 4 test users you can use to try Money 💸 alone or with friends.
+
+```
+Username: t1
+Password: t1
+
+Username: t2
+Password: t2
+
+Username: t3
+Password: t3
+
+Username: t4
+Password: t4
+```
+
+Login with this data when in front of the login screen.
+
+Have fun! 💸
 
 
 
