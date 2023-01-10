@@ -16,9 +16,7 @@ Make sure you have installed:
 
 - XCode
 - Cocoapods
-- Flutter SDK: Flutter is an awesome dart framework, We used Flutter because it can build application for basic all platforms using the same source code!
-To install flutter follow the guide [here](https://docs.flutter.dev/get-started/install)
-
+- Flutter SDK: To install flutter follow the guide [here](https://docs.flutter.dev/get-started/install)
 - VSCode (with the Flutter extension)
 - Java: You need to [install](https://www.oracle.com/java/technologies/downloads/) java to run the backend of our game, we use the jdk 19 version.
 
