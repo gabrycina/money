@@ -64,7 +64,7 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 If you're running Money 💸 locally, just insert 127.0.0.1 as the address and 1234 as the port
 
 #### Hosting Money 💸 on your Mac...
-If you want to play online with other players you need also [ngrok](https://ngrok.com/download) and execute the command
+If you want to play online with other players you need [ngrok](https://ngrok.com/download). Download it and execute the command
 
 ```
 $ ~ ngrok tcp 1234
