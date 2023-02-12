@@ -36,7 +36,7 @@ $ ~ java -jar backend.jar
 ```
 
 
-#### Start MacOS App
+#### Start App
 
 ```
 $ ~/money cd frontend
