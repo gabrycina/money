@@ -9,13 +9,14 @@ Money is a rational game based on social economy concepts, inspired by [Five You
 a prize game created by the famous youtuber Tom Scott. Our version of the game works with 4 players, each of whom will also have a superpower that can be 
 used once per game to gain different advantages.
 
-## How to install (MacOS)
+## How to install
 
 ### Required Installations
 Make sure you have installed:
 
-- XCode
-- Cocoapods
+- XCode (MacOS only)
+- Visual Studio with visual C++ dev kit (Windows only)
+- Cocoapods (MacOS only)
 - Flutter SDK: To install flutter follow the guide [here](https://docs.flutter.dev/get-started/install)
 - VSCode (with the Flutter extension)
 - Java: You need to [install](https://www.oracle.com/java/technologies/downloads/) java to run the backend of our game, we use the jdk 19 version.
